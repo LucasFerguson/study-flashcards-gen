@@ -6,9 +6,10 @@ import { api } from "~/utils/api";
 import { toPng } from "html-to-image";
 import { useRef, useState, useEffect, forwardRef } from "react";
 
+import cards from "./cards.json"
 
 // DPI setting
-const DPI = 96;  // Standard screen DPI
+const DPI = 150;  // Standard screen DPI (old val 96)
 
 // Standard sizes in pixels (calculated from inches * DPI)
 const CARD_WIDTH_PX = 2.5 * DPI;   // 2.5in
@@ -26,15 +27,6 @@ export default function Home() {
       subjectColor: "#4CAF50",
       title: "Pythagorean Theorem",
       description: "In a right triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.",
-      formula: "a² + b² = c²",
-      example: "If a = 3 and b = 4, then c = 5",
-      footer: "Source: Geometry Basics",
-    },
-    {
-      subject: "Math",
-      subjectColor: "#4CAF50",
-      title: "Pythagorean Theorem",
-      description: "this is a test \t  hi \n- 1\n- 2",
       formula: "a² + b² = c²",
       example: "If a = 3 and b = 4, then c = 5",
       footer: "Source: Geometry Basics",
@@ -58,100 +50,19 @@ export default function Home() {
       footer: "Source: History Textbook",
     },
     {
-      subject: "Math",
-      subjectColor: "#4CAF50",
-      title: "Quadratic Formula",
-      description: "The solution to a quadratic equation ax² + bx + c = 0.",
-      formula: "x = (-b ± √(b² - 4ac)) / 2a",
-      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
-      footer: "Source: Algebra Essentials",
-    },
-    {
-      subject: "Math",
-      subjectColor: "#4CAF50",
-      title: "Quadratic Formula",
-      description: "The solution to a quadratic equation ax² + bx + c = 0.",
-      formula: "x = (-b ± √(b² - 4ac)) / 2a",
-      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
-      footer: "Source: Algebra Essentials",
-    },
-    {
-      subject: "Math",
-      subjectColor: "#4CAF50",
-      title: "Quadratic Formula",
-      description: "The solution to a quadratic equation ax² + bx + c = 0.",
-      formula: "x = (-b ± √(b² - 4ac)) / 2a",
-      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
-      footer: "Source: Algebra Essentials",
-    },
-    {
-      subject: "Math",
-      subjectColor: "#4CAF50",
-      title: "Quadratic Formula",
-      description: "The solution to a quadratic equation ax² + bx + c = 0.",
-      formula: "x = (-b ± √(b² - 4ac)) / 2a",
-      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
-      footer: "Source: Algebra Essentials",
-    },
-    {
-      subject: "Math",
-      subjectColor: "#4CAF50",
-      title: "Quadratic Formula",
-      description: "The solution to a quadratic equation ax² + bx + c = 0.",
-      formula: "x = (-b ± √(b² - 4ac)) / 2a",
-      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
-      footer: "Source: Algebra Essentials",
-    },
-    {
-      subject: "Math",
-      subjectColor: "#4CAF50",
-      title: "Quadratic Formula",
-      description: "The solution to a quadratic equation ax² + bx + c = 0.",
-      formula: "x = (-b ± √(b² - 4ac)) / 2a",
-      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
-      footer: "Source: Algebra Essentials",
-    },
-    {
-      subject: "Math",
-      subjectColor: "#4CAF50",
-      title: "Quadratic Formula",
-      description: "The solution to a quadratic equation ax² + bx + c = 0.",
-      formula: "x = (-b ± √(b² - 4ac)) / 2a",
-      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
-      footer: "Source: Algebra Essentials",
-    },
-    {
-      subject: "Math",
-      subjectColor: "#4CAF50",
-      title: "Quadratic Formula",
-      description: "The solution to a quadratic equation ax² + bx + c = 0.",
-      formula: "x = (-b ± √(b² - 4ac)) / 2a",
-      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
-      footer: "Source: Algebra Essentials",
-    },
-    {
-      subject: "Math",
-      subjectColor: "#4CAF50",
-      title: "Quadratic Formula",
-      description: "The solution to a quadratic equation ax² + bx + c = 0.",
-      formula: "x = (-b ± √(b² - 4ac)) / 2a",
-      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
-      footer: "Source: Algebra Essentials",
-    },
-    {
-      subject: "Math",
-      subjectColor: "#4CAF50",
-      title: "Quadratic Formula",
-      description: "The solution to a quadratic equation ax² + bx + c = 0.",
-      formula: "x = (-b ± √(b² - 4ac)) / 2a",
-      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
-      footer: "Source: Algebra Essentials",
+      subject: "System",
+      subjectColor: "#5e40f2",
+      title: "Morning Routine",
+      description: "Wake Up 9:00 am\n    Alexa + Phone + Watch Alarms ⏰\nHABIT 1\n    💧 Drink Water for energy ⚡\nHABIT 2\n    🚿 Take Shower\nHABIT 3\n    👕 Get Dressed\nHABIT 4\n    ✂ Shave face\nHABIT 5\n    🚶 Start Walking to Class\nHABIT 6\n📃 Check TODOs and Calendar 📆",
+      formula: "",
+      example: "",
+      footer: "Created 2025-03-25 by Lucas"
     }
   ];
 
 
   // Combine all card data
-  const allCards = flashcardsData;
+  const allCards = flashcardsData.concat(JSON.parse(JSON.stringify(cards)));
 
   // Create refs for all cards
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -212,6 +123,7 @@ export default function Home() {
               "example": "If a = 3 and b = 4, then c = 5",
               "footer": "Source: Geometry Basics"
             }`}
+            <p>Note: Recommended max description size is 730 chars</p>
           </div>
 
 
@@ -319,42 +231,45 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
   return (
     <div
       ref={ref}
-      className="w-[240px] h-[336px] border rounded-lg shadow-lg flex flex-col overflow-hidden"
-      style={{ borderColor: subjectColor, backgroundColor: subjectColor }} // Apply hex color as border
+      className="border rounded-lg shadow-lg flex flex-col overflow-hidden"
+      style={{
+        borderColor: subjectColor,
+        backgroundColor: subjectColor,
+        width: `${CARD_WIDTH_PX}px`,
+        height: `${CARD_HEIGHT_PX}px`
+      }}
     >
       {/* Subject Banner */}
       <div
         className="text-white text-center py-1"
-        style={{ backgroundColor: subjectColor }} // Apply hex color as background
+        style={{ backgroundColor: subjectColor }}
       >
-        <span className="font-bold uppercase">{subject}</span>
+        <span className="font-bold uppercase text-lg">{subject}</span>
       </div>
 
       {/* Card Content */}
       <div className="flex-grow p-2 bg-white flex flex-col justify-between rounded-md mx-2 mb-1 shadow-sm">
         <div>
-          <h2 className="text-base font-normal mb-1">{title}</h2>
-          <p className="text-xs text-gray-700 mb-1 whitespace-pre-wrap">{description}</p>
+          <h2 className="text-xl font-semibold mb-2">{title}</h2>
+          <p className="text-base text-gray-700 mb-2 whitespace-pre-wrap">{description}</p>
           {formula && (
-            <p className="text-xs text-gray-900 font-light">
+            <p className="text-base text-gray-900 font-light">
               <strong>Formula:</strong> {formula}
             </p>
           )}
           {example && (
-            <p className="text-xs text-gray-900 mt-1 font-light">
+            <p className="text-base text-gray-900 mt-1 font-light">
               <strong>Example:</strong> {example}
             </p>
           )}
         </div>
 
-
         {/* Footer */}
         {footer && (
-          <div className="text-xs text-gray-500 mt-auto pt-1 border-t border-gray-200">
+          <div className="text-sm text-gray-500 mt-auto pt-1 border-t border-gray-200">
             {footer}
           </div>
         )}
-
       </div>
     </div>
   );
