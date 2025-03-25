@@ -3,6 +3,10 @@ import Link from "next/link";
 
 import { api } from "~/utils/api";
 
+import { toPng } from "html-to-image";
+import { useRef } from "react";
+
+
 export default function Home() {
   const hello = api.post.hello.useQuery({ text: "from tRPC" });
 
@@ -47,6 +51,57 @@ export default function Home() {
     },
   ];
 
+  const arvrflashcardsData = [
+    {
+      "subject": "Virtual Reality",
+      "subjectColor": "#2196F3",
+      "title": "Sensorama (1962)",
+      "description": "Morton Heilig developed the Sensorama, a machine that combined 3D visuals, sound, vibrations, and even smells to immerse users in a simulated environment.",
+      "formula": "",
+      "example": "A user could experience a simulated motorcycle ride through the streets of New York, feeling the vibrations and smelling exhaust fumes.",
+      "footer": "Source: Heilig, M. (1962)"
+    },
+    {
+      "subject": "Virtual Reality",
+      "subjectColor": "#2196F3",
+      "title": "The Sword of Damocles (1968)",
+      "description": "Ivan Sutherland and his student Bob Sproull created the first head-mounted display (HMD), nicknamed 'The Sword of Damocles' due to its heavy structure suspended from the ceiling.",
+      "formula": "",
+      "example": "Displayed simple wireframe rooms, tracking the user’s head movements to change perspective.",
+      "footer": "Source: Sutherland, I. (1968)"
+    },
+    {
+      "subject": "Virtual Reality",
+      "subjectColor": "#2196F3",
+      "title": "Virtual Reality Term Coined (1987)",
+      "description": "Jaron Lanier, founder of VPL Research, coined the term 'Virtual Reality' and developed early VR gear like the DataGlove and EyePhone.",
+      "formula": "",
+      "example": "VPL Research sold VR equipment to NASA for space simulations.",
+      "footer": "Source: Lanier, J. (1987)"
+    },
+    {
+      "subject": "Virtual Reality",
+      "subjectColor": "#2196F3",
+      "title": "Oculus Rift Kickstarter (2012)",
+      "description": "Palmer Luckey launched a Kickstarter campaign for the Oculus Rift, reigniting interest in consumer VR and leading to Facebook’s acquisition of Oculus in 2014.",
+      "formula": "",
+      "example": "The Oculus Rift provided a 90-degree field of view and low-latency tracking, making VR accessible to gamers and developers.",
+      "footer": "Source: Luckey, P. (2012)"
+    },
+    {
+      "subject": "Virtual Reality",
+      "subjectColor": "#2196F3",
+      "title": "Modern VR (2020s)",
+      "description": "Advancements in computing power, optics, and motion tracking led to devices like the Meta Quest and Valve Index, making VR more accessible and immersive.",
+      "formula": "",
+      "example": "Applications expanded beyond gaming into education, medicine, and virtual collaboration.",
+      "footer": "Source: Various (2020s)"
+    }
+  ];
+
+
+  let allcards = flashcardsData.concat(arvrflashcardsData);
+
 
   return (
     <>
@@ -59,7 +114,7 @@ export default function Home() {
         <div className="flex flex-col items-center p-4">
           <h1 className="text-2xl font-bold mb-6">Educational Flashcards</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {flashcardsData.map((card, index) => (
+            {allcards.map((card, index) => (
               <Flashcard key={index} {...card} />
             ))}
           </div>
@@ -81,41 +136,64 @@ function Flashcard({
   example,
   footer,
 }) {
+
+
+  const cardRef = useRef(null);
+
+  const handleExport = () => {
+    if (cardRef.current) {
+      toPng(cardRef.current).then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = `${title}.png`;
+        link.href = dataUrl;
+        link.click();
+      });
+    }
+  };
+
   return (
     <div
       className="w-[2.5in] h-[3.5in] border rounded-lg shadow-lg flex flex-col overflow-hidden"
-      style={{ borderColor: subjectColor }} // Apply hex color as border
+      style={{ borderColor: subjectColor, backgroundColor: subjectColor }} // Apply hex color as border
     >
       {/* Subject Banner */}
       <div
-        className="text-white text-center py-2"
+        className="text-white text-center py-1"
         style={{ backgroundColor: subjectColor }} // Apply hex color as background
       >
         <span className="font-bold uppercase">{subject}</span>
       </div>
 
       {/* Card Content */}
-      <div className="flex-grow p-4 bg-white flex flex-col justify-between">
+      <div className="flex-grow p-2 bg-white flex flex-col justify-between rounded-md mx-2 mb-1 shadow-sm">
         <div>
-          <h2 className="text-lg font-bold mb-2">{title}</h2>
-          <p className="text-sm text-gray-700 mb-2">{description}</p>
+          <h2 className="text-lg font-normal mb-1">{title}</h2>
+          <p className="text-sm text-gray-700 mb-1">{description}</p>
           {formula && (
-            <p className="text-sm text-gray-900 font-semibold">
+            <p className="text-sm text-gray-900 font-light">
               <strong>Formula:</strong> {formula}
             </p>
           )}
           {example && (
-            <p className="text-sm text-gray-900 mt-2">
+            <p className="text-sm text-gray-900 mt-1 font-light">
               <strong>Example:</strong> {example}
             </p>
           )}
         </div>
         {/* Footer */}
         {footer && (
-          <div className="text-xs text-gray-500 mt-auto pt-2 border-t border-gray-200">
+          <div className="text-xs text-gray-500 mt-auto pt-1 border-t border-gray-200">
             {footer}
           </div>
         )}
+
+        {/* Export Button */}
+        <button
+          onClick={handleExport}
+          className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Export as PNG
+        </button>
       </div>
     </div>
   );
