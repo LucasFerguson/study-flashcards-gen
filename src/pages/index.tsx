@@ -8,8 +8,7 @@ import { useRef, useEffect, forwardRef } from "react";
 
 
 export default function Home() {
-  const hello = api.post.hello.useQuery({ text: "from tRPC" });
-
+  // const hello = api.post.hello.useQuery({ text: "from tRPC" });
 
   // JSON object array containing card data
   const flashcardsData = [
@@ -49,6 +48,87 @@ export default function Home() {
       example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
       footer: "Source: Algebra Essentials",
     },
+    {
+      subject: "Math",
+      subjectColor: "#4CAF50",
+      title: "Quadratic Formula",
+      description: "The solution to a quadratic equation ax² + bx + c = 0.",
+      formula: "x = (-b ± √(b² - 4ac)) / 2a",
+      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
+      footer: "Source: Algebra Essentials",
+    },
+    {
+      subject: "Math",
+      subjectColor: "#4CAF50",
+      title: "Quadratic Formula",
+      description: "The solution to a quadratic equation ax² + bx + c = 0.",
+      formula: "x = (-b ± √(b² - 4ac)) / 2a",
+      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
+      footer: "Source: Algebra Essentials",
+    },
+    {
+      subject: "Math",
+      subjectColor: "#4CAF50",
+      title: "Quadratic Formula",
+      description: "The solution to a quadratic equation ax² + bx + c = 0.",
+      formula: "x = (-b ± √(b² - 4ac)) / 2a",
+      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
+      footer: "Source: Algebra Essentials",
+    },
+    {
+      subject: "Math",
+      subjectColor: "#4CAF50",
+      title: "Quadratic Formula",
+      description: "The solution to a quadratic equation ax² + bx + c = 0.",
+      formula: "x = (-b ± √(b² - 4ac)) / 2a",
+      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
+      footer: "Source: Algebra Essentials",
+    },
+    {
+      subject: "Math",
+      subjectColor: "#4CAF50",
+      title: "Quadratic Formula",
+      description: "The solution to a quadratic equation ax² + bx + c = 0.",
+      formula: "x = (-b ± √(b² - 4ac)) / 2a",
+      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
+      footer: "Source: Algebra Essentials",
+    },
+    {
+      subject: "Math",
+      subjectColor: "#4CAF50",
+      title: "Quadratic Formula",
+      description: "The solution to a quadratic equation ax² + bx + c = 0.",
+      formula: "x = (-b ± √(b² - 4ac)) / 2a",
+      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
+      footer: "Source: Algebra Essentials",
+    },
+    {
+      subject: "Math",
+      subjectColor: "#4CAF50",
+      title: "Quadratic Formula",
+      description: "The solution to a quadratic equation ax² + bx + c = 0.",
+      formula: "x = (-b ± √(b² - 4ac)) / 2a",
+      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
+      footer: "Source: Algebra Essentials",
+    },
+    {
+      subject: "Math",
+      subjectColor: "#4CAF50",
+      title: "Quadratic Formula",
+      description: "The solution to a quadratic equation ax² + bx + c = 0.",
+      formula: "x = (-b ± √(b² - 4ac)) / 2a",
+      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
+      footer: "Source: Algebra Essentials",
+    },
+    {
+      subject: "Math",
+      subjectColor: "#4CAF50",
+      title: "Quadratic Formula",
+      description: "The solution to a quadratic equation ax² + bx + c = 0.",
+      formula: "x = (-b ± √(b² - 4ac)) / 2a",
+      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
+      footer: "Source: Algebra Essentials",
+    }
   ];
 
 
@@ -117,7 +197,57 @@ export default function Home() {
             ))}
           </div>
         </div>
+
+        {/* Display the cards in a nice 8.5in by 11in sheet of paper for easy printing */}
+        {/* Download Print Layout Image Button */}
+        {/* Split cards into groups of 6 for multiple pages */}
+        {Array.from({ length: Math.ceil(allCards.length / 6) }).map((_, pageIndex) => (
+          <div key={`page-container-${pageIndex}`}>
+            <button
+              onClick={() => {
+                const printLayout = document.querySelector(`#page-${pageIndex}`);
+                if (printLayout) {
+                  toPng(printLayout as HTMLElement)
+                    .then((dataUrl) => {
+                      const link = document.createElement('a');
+                      link.download = `flashcards-page-${pageIndex + 1}.png`;
+                      link.href = dataUrl;
+                      link.click();
+                    })
+                    .catch((err) => console.error('Error creating layout image:', err));
+                }
+              }}
+              className="mb-6 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 print:hidden"
+            >
+              Download Page {pageIndex + 1}
+            </button>
+
+            <div className="print:block print:p-4">
+              <div
+                id={`page-${pageIndex}`}
+                className="w-[11in] min-h-[8.5in] bg-white p-4 grid grid-cols-3 gap-4 auto-rows-max mb-8 print:mb-0"
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(4, 2.5in)',
+                  gridTemplateRows: 'repeat(2, 3.5in)',
+                  gap: '0.1in',
+                  padding: '0.1in'
+                }}
+              >
+                {allCards.slice(pageIndex * 8, (pageIndex + 1) * 8).map((card, index) => (
+                  <Flashcard
+                    key={`print-${pageIndex}-${index}`}
+                    {...card}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+
       </main>
+
+
     </>
   );
 }
