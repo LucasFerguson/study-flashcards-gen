@@ -7,6 +7,15 @@ import { toPng } from "html-to-image";
 import { useRef, useState, useEffect, forwardRef } from "react";
 
 
+// DPI setting
+const DPI = 96;  // Standard screen DPI
+
+// Standard sizes in pixels (calculated from inches * DPI)
+const CARD_WIDTH_PX = 2.5 * DPI;   // 2.5in
+const CARD_HEIGHT_PX = 3.5 * DPI;  // 3.5in
+const PAGE_WIDTH_PX = 11 * DPI;    // 11in
+const PAGE_HEIGHT_PX = 8.5 * DPI;  // 8.5in
+
 export default function Home() {
   // const hello = api.post.hello.useQuery({ text: "from tRPC" });
 
@@ -25,7 +34,7 @@ export default function Home() {
       subject: "Math",
       subjectColor: "#4CAF50",
       title: "Pythagorean Theorem",
-      description: "this is a test \t  hi - 1\n - 2",
+      description: "this is a test \t  hi \n- 1\n- 2",
       formula: "a² + b² = c²",
       example: "If a = 3 and b = 4, then c = 5",
       footer: "Source: Geometry Basics",
@@ -191,19 +200,19 @@ export default function Home() {
           {/* json formatting instructions */}
           <p className="text-sm text-gray-700 mb-6">
             <strong>Instructions:</strong> Edit the card data in the Card Editor below. Click "Save Card as Image" to generate a PNG image of the card. Click "Export All Cards as PNGs" to download all cards as PNG images. Print the cards for offline use.
-            <p className="text-sm text-gray-500 mb-6">
-              Example JSON format:
-              {`{
-      "subject": "Math",
-      "subjectColor": "#4CAF50",
-      "title": "Pythagorean Theorem",
-      "description": "In a right triangle...",
-      "formula": "a² + b² = c²",
-      "example": "If a = 3 and b = 4, then c = 5",
-      "footer": "Source: Geometry Basics"
-    }`}
-            </p>
           </p>
+          <div className="text-sm text-gray-500 mb-6">
+            Example JSON format:
+            {`{
+              "subject": "Math",
+              "subjectColor": "#4CAF50",
+              "title": "Pythagorean Theorem",
+              "description": "In a right triangle...",
+              "formula": "a² + b² = c²",
+              "example": "If a = 3 and b = 4, then c = 5",
+              "footer": "Source: Geometry Basics"
+            }`}
+          </div>
 
 
           {/* add card editor */}
@@ -259,8 +268,10 @@ export default function Home() {
                 className="w-[11in] min-h-[8.5in] bg-white p-4 grid grid-cols-3 gap-4 auto-rows-max mb-8 print:mb-0"
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(4, 2.5in)',
-                  gridTemplateRows: 'repeat(2, 3.5in)',
+                  width: `${PAGE_WIDTH_PX}px`,
+                  height: `${PAGE_HEIGHT_PX}px`,
+                  gridTemplateColumns: `repeat(4, ${CARD_WIDTH_PX}px)`,
+                  gridTemplateRows: `repeat(2, ${CARD_HEIGHT_PX}px)`,
                   gap: '0.1in',
                   padding: '0.3in'
                 }}
@@ -323,7 +334,7 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
       <div className="flex-grow p-2 bg-white flex flex-col justify-between rounded-md mx-2 mb-1 shadow-sm">
         <div>
           <h2 className="text-base font-normal mb-1">{title}</h2>
-          <p className="text-xs text-gray-700 mb-1">{description}</p>
+          <p className="text-xs text-gray-700 mb-1 whitespace-pre-wrap">{description}</p>
           {formula && (
             <p className="text-xs text-gray-900 font-light">
               <strong>Formula:</strong> {formula}
@@ -506,7 +517,7 @@ const CardEditor: React.FC = () => {
             <Flashcard {...card} />
           </div>
           <div className="mt-4 bg-gray-800 p-4 rounded-lg">
-            <pre className="text-white text-xs overflow-auto">
+            <pre className="text-white text-xs whitespace-pre-wrap break-words">
               {JSON.stringify(card, null, 2)}
             </pre>
           </div>
