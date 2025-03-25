@@ -7,6 +7,7 @@ import { toPng } from "html-to-image";
 import { useRef, useState, useEffect, forwardRef } from "react";
 
 import cards from "./cards.json"
+import ReactMarkdown from "react-markdown";
 
 // DPI setting
 const DPI = 150;  // Standard screen DPI (old val 96)
@@ -251,7 +252,14 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
       <div className="flex-grow p-2 bg-white flex flex-col justify-between rounded-md mx-2 mb-1 shadow-sm">
         <div>
           <h2 className="text-xl font-semibold mb-2">{title}</h2>
-          <p className="text-base text-gray-700 mb-2 whitespace-pre-wrap">{description}</p>
+          <div className="">
+            <p className="text-base text-gray-700 mb-2 whitespace-pre-wrap">{description}</p>
+
+            {/* className="whitespace-pre-wrap" */}
+            {/* <ReactMarkdown >
+              {description}
+            </ReactMarkdown> */}
+          </div>
           {formula && (
             <p className="text-base text-gray-900 font-light">
               <strong>Formula:</strong> {formula}

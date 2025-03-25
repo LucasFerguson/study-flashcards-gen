@@ -99,5 +99,75 @@
 		"title": "Display",
 		"description": "The display component presents the rendered images to the user through devices like head-mounted displays (HMDs). These systems employ lenses and image planes to focus and direct light appropriately. Addressing optical issues such as chromatic aberrations is essential to ensure clear and accurate visuals, enhancing the overall immersive experience.",
 		"footer": "Source: University of Calgary"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#FF5733",
+		"title": "Headings",
+		"description": "# Heading Level 1\n## Heading Level 2\n### Heading Level 3\n#### Heading Level 4\n##### Heading Level 5\n###### Heading Level 6",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#33FF57",
+		"title": "Emphasis",
+		"description": "To *italicize* text, wrap it with single asterisks or underscores.\nTo **bold** text, wrap it with double asterisks or underscores.\nCombine them for ***bold italics***.",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#3357FF",
+		"title": "Lists",
+		"description": "Unordered lists:\n- Item 1\n- Item 2\n  - Subitem 2.1\n  - Subitem 2.2\n\nOrdered lists:\n1. First item\n2. Second item\n   1. Subitem 2.1\n   2. Subitem 2.2",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#F39C12",
+		"title": "Links",
+		"description": "Inline-style link: [OpenAI](https://www.openai.com/)\nReference-style link: [OpenAI][1]\n\n[1]: https://www.openai.com/",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#9B59B6",
+		"title": "Images",
+		"description": "Inline-style image:\n![Alt text](https://www.example.com/image.jpg)\n\nReference-style image:\n![Alt text][image]\n\n[image]: https://www.example.com/image.jpg",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#E74C3C",
+		"title": "Blockquotes",
+		"description": "> This is a blockquote.\n>\n> Blockquotes can span multiple lines or paragraphs.",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#1ABC9C",
+		"title": "Code",
+		"description": "Inline code: `print('Hello, World!')`\n\nBlock code:\n```\ndef hello_world():\n    print('Hello, World!')\n```",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#D35400",
+		"title": "Horizontal Rules",
+		"description": "Three or more hyphens, asterisks, or underscores on a line create a horizontal rule:\n\n---\n\n***\n\n___",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#34495E",
+		"title": "Tables",
+		"description": "| Header 1 | Header 2 | Header 3 |\n|----------|----------|----------|\n| Row 1    | Data     | Here     |\n| Row 2    | Data     | Here     |",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#2ECC71",
+		"title": "Task Lists",
+		"description": "- [x] Completed task\n- [ ] Incomplete task",
+		"footer": "Source: Markdown Guide"
 	}
 ]
