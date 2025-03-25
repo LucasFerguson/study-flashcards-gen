@@ -4,7 +4,7 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 
 import { toPng } from "html-to-image";
-import { useRef, useEffect, forwardRef } from "react";
+import { useRef, useState, useEffect, forwardRef } from "react";
 
 
 export default function Home() {
@@ -17,6 +17,15 @@ export default function Home() {
       subjectColor: "#4CAF50",
       title: "Pythagorean Theorem",
       description: "In a right triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.",
+      formula: "a² + b² = c²",
+      example: "If a = 3 and b = 4, then c = 5",
+      footer: "Source: Geometry Basics",
+    },
+    {
+      subject: "Math",
+      subjectColor: "#4CAF50",
+      title: "Pythagorean Theorem",
+      description: "this is a test \t  hi - 1\n - 2",
       formula: "a² + b² = c²",
       example: "If a = 3 and b = 4, then c = 5",
       footer: "Source: Geometry Basics",
@@ -174,9 +183,31 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#e0f7ff] to-[#ffffff]">
+
         <div className="flex flex-col items-center p-4">
-          <h1 className="text-2xl font-bold mb-6">Educational Flashcards</h1>
+          <h1 className="text-2xl font-bold mb-6">Educational Flashcards Generator App</h1>
+
+          {/* json formatting instructions */}
+          <p className="text-sm text-gray-700 mb-6">
+            <strong>Instructions:</strong> Edit the card data in the Card Editor below. Click "Save Card as Image" to generate a PNG image of the card. Click "Export All Cards as PNGs" to download all cards as PNG images. Print the cards for offline use.
+            <p className="text-sm text-gray-500 mb-6">
+              Example JSON format:
+              {`{
+      "subject": "Math",
+      "subjectColor": "#4CAF50",
+      "title": "Pythagorean Theorem",
+      "description": "In a right triangle...",
+      "formula": "a² + b² = c²",
+      "example": "If a = 3 and b = 4, then c = 5",
+      "footer": "Source: Geometry Basics"
+    }`}
+            </p>
+          </p>
+
+
+          {/* add card editor */}
+          <CardEditor />
 
           {/* Export All Button */}
           <button
@@ -231,7 +262,7 @@ export default function Home() {
                   gridTemplateColumns: 'repeat(4, 2.5in)',
                   gridTemplateRows: 'repeat(2, 3.5in)',
                   gap: '0.1in',
-                  padding: '0.1in'
+                  padding: '0.3in'
                 }}
               >
                 {allCards.slice(pageIndex * 8, (pageIndex + 1) * 8).map((card, index) => (
@@ -291,19 +322,21 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
       {/* Card Content */}
       <div className="flex-grow p-2 bg-white flex flex-col justify-between rounded-md mx-2 mb-1 shadow-sm">
         <div>
-          <h2 className="text-lg font-normal mb-1">{title}</h2>
-          <p className="text-sm text-gray-700 mb-1">{description}</p>
+          <h2 className="text-base font-normal mb-1">{title}</h2>
+          <p className="text-xs text-gray-700 mb-1">{description}</p>
           {formula && (
-            <p className="text-sm text-gray-900 font-light">
+            <p className="text-xs text-gray-900 font-light">
               <strong>Formula:</strong> {formula}
             </p>
           )}
           {example && (
-            <p className="text-sm text-gray-900 mt-1 font-light">
+            <p className="text-xs text-gray-900 mt-1 font-light">
               <strong>Example:</strong> {example}
             </p>
           )}
         </div>
+
+
         {/* Footer */}
         {footer && (
           <div className="text-xs text-gray-500 mt-auto pt-1 border-t border-gray-200">
@@ -315,3 +348,173 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
     </div>
   );
 });
+
+
+const CardEditor: React.FC = () => {
+  const [card, setCard] = useState<FlashcardProps>({
+    subject: "",
+    subjectColor: "#4CAF50",
+    title: "",
+    description: "",
+    formula: "",
+    example: "",
+    footer: ""
+  });
+
+  const previewRef = useRef<HTMLDivElement>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setCard(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (previewRef.current) {
+      try {
+        const dataUrl = await toPng(previewRef.current);
+        const link = document.createElement('a');
+        link.download = `${card.title || 'flashcard'}.png`;
+        link.href = dataUrl;
+        link.click();
+
+        // // Reset form
+        // setCard({
+        //   subject: "",
+        //   subjectColor: "#4CAF50",
+        //   title: "",
+        //   description: "",
+        //   formula: "",
+        //   example: "",
+        //   footer: ""
+        // });
+      } catch (err) {
+        console.error('Error saving card:', err);
+      }
+    }
+  };
+
+  return (
+    <div className="flex gap-8 items-start w-full max-w-4xl">
+      <form onSubmit={handleSubmit} className="flex-1 bg-white p-6 rounded-lg shadow-lg">
+        <div className="flex flex-wrap mb-6">
+          <div className="w-full md:w-1/2 px-3 mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Subject
+              <input
+                type="text"
+                name="subject"
+                value={card.subject}
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 mt-1"
+              />
+            </label>
+          </div>
+          <div className="w-full md:w-1/2 px-3 mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Subject Color
+              <input
+                type="color"
+                name="subjectColor"
+                value={card.subjectColor}
+                onChange={handleChange}
+                className="w-full h-10 border rounded px-3 py-2 mt-1"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Title
+            <input
+              type="text"
+              name="title"
+              value={card.title}
+              onChange={handleChange}
+              className="w-full border rounded px-3 py-2 mt-1"
+            />
+          </label>
+        </div>
+
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Description
+            <textarea
+              name="description"
+              value={card.description}
+              onChange={handleChange}
+              className="w-full border rounded px-3 py-2 mt-1"
+              rows={3}
+            />
+          </label>
+        </div>
+
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Formula
+            <input
+              type="text"
+              name="formula"
+              value={card.formula}
+              onChange={handleChange}
+              className="w-full border rounded px-3 py-2 mt-1"
+            />
+          </label>
+        </div>
+
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Example
+            <input
+              type="text"
+              name="example"
+              value={card.example}
+              onChange={handleChange}
+              className="w-full border rounded px-3 py-2 mt-1"
+            />
+          </label>
+        </div>
+
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Footer
+            <input
+              type="text"
+              name="footer"
+              value={card.footer}
+              onChange={handleChange}
+              className="w-full border rounded px-3 py-2 mt-1"
+            />
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Save Card as Image
+        </button>
+      </form>
+
+      {/* Live Preview */}
+      <div className="flex-1 flex flex-col items-end">
+        <div className="sticky top-4">
+          <h3 className="text-center mb-4">Live Preview</h3>
+          <div ref={previewRef}>
+            <Flashcard {...card} />
+          </div>
+          <div className="mt-4 bg-gray-800 p-4 rounded-lg">
+            <pre className="text-white text-xs overflow-auto">
+              {JSON.stringify(card, null, 2)}
+            </pre>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  );
+};
