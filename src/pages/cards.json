@@ -78,5 +78,26 @@
 		"description": "Ruby is an interpreted, high-level, general-purpose programming language designed for simplicity and productivity.",
 		"example": "puts 'Hello, World!'",
 		"footer": "Source: Ruby-lang.org"
+	},
+	{
+		"subject": "Virtual Reality Component",
+		"subjectColor": "#FF5733",
+		"title": "Tracking",
+		"description": "Tracking systems in VR capture the user's physical movements and translate them into the virtual environment, ensuring accurate representation of actions. Techniques include goniometry for measuring joint angles, fiducial markers resembling QR codes for spatial positioning, and Simultaneous Localization and Mapping (SLAM) for real-time mapping and tracking of the user's location within an unknown environment.",
+		"footer": "Source: ScienceDirect Topics"
+	},
+	{
+		"subject": "Virtual Reality Component",
+		"subjectColor": "#33FF57",
+		"title": "Rendering",
+		"description": "Rendering in VR involves generating the visual output based on the user's head position and orientation, producing images that align with their perspective. This process utilizes the standard computer graphics pipeline, incorporating shape information, colors, lighting, and textures to create realistic and immersive visuals.",
+		"footer": "Source: XR Today"
+	},
+	{
+		"subject": "Virtual Reality Component",
+		"subjectColor": "#3357FF",
+		"title": "Display",
+		"description": "The display component presents the rendered images to the user through devices like head-mounted displays (HMDs). These systems employ lenses and image planes to focus and direct light appropriately. Addressing optical issues such as chromatic aberrations is essential to ensure clear and accurate visuals, enhancing the overall immersive experience.",
+		"footer": "Source: University of Calgary"
 	}
 ]
