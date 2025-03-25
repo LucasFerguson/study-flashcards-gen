@@ -10,6 +10,7 @@ const geist = Geist({
 });
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+
   return (
     <div className={geist.className}>
       <Component {...pageProps} />
@@ -18,3 +19,4 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 };
 
 export default api.withTRPC(MyApp);
+

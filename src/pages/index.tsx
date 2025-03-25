@@ -6,6 +6,48 @@ import { api } from "~/utils/api";
 export default function Home() {
   const hello = api.post.hello.useQuery({ text: "from tRPC" });
 
+
+  // JSON object array containing card data
+  const flashcardsData = [
+    {
+      subject: "Math",
+      subjectColor: "#4CAF50",
+      title: "Pythagorean Theorem",
+      description: "In a right triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.",
+      formula: "a² + b² = c²",
+      example: "If a = 3 and b = 4, then c = 5",
+      footer: "Source: Geometry Basics",
+    },
+    {
+      subject: "Science",
+      subjectColor: "#2196F3",
+      title: "Newton's Second Law",
+      description: "Force equals mass times acceleration.",
+      formula: "F = ma",
+      example: "If m = 2kg and a = 3m/s², then F = 6N",
+      footer: "Source: Physics Fundamentals",
+    },
+    {
+      subject: "History",
+      subjectColor: "#FF5722",
+      title: "The American Revolution",
+      description: "A political upheaval during which the Thirteen Colonies broke free from British rule.",
+      formula: "",
+      example: "Occurred between 1765 and 1783.",
+      footer: "Source: History Textbook",
+    },
+    {
+      subject: "Math",
+      subjectColor: "#4CAF50",
+      title: "Quadratic Formula",
+      description: "The solution to a quadratic equation ax² + bx + c = 0.",
+      formula: "x = (-b ± √(b² - 4ac)) / 2a",
+      example: "For x² - 5x + 6 = 0, x = 2 or x = 3",
+      footer: "Source: Algebra Essentials",
+    },
+  ];
+
+
   return (
     <>
       <Head>
@@ -14,39 +56,67 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
+        <div className="flex flex-col items-center p-4">
+          <h1 className="text-2xl font-bold mb-6">Educational Flashcards</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {flashcardsData.map((card, index) => (
+              <Flashcard key={index} {...card} />
+            ))}
           </div>
-          <p className="text-2xl text-white">
-            {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-          </p>
         </div>
       </main>
+
     </>
+  );
+}
+
+
+
+function Flashcard({
+  subject,
+  subjectColor,
+  title,
+  description,
+  formula,
+  example,
+  footer,
+}) {
+  return (
+    <div
+      className="w-[2.5in] h-[3.5in] border rounded-lg shadow-lg flex flex-col overflow-hidden"
+      style={{ borderColor: subjectColor }} // Apply hex color as border
+    >
+      {/* Subject Banner */}
+      <div
+        className="text-white text-center py-2"
+        style={{ backgroundColor: subjectColor }} // Apply hex color as background
+      >
+        <span className="font-bold uppercase">{subject}</span>
+      </div>
+
+      {/* Card Content */}
+      <div className="flex-grow p-4 bg-white flex flex-col justify-between">
+        <div>
+          <h2 className="text-lg font-bold mb-2">{title}</h2>
+          <p className="text-sm text-gray-700 mb-2">{description}</p>
+          {formula && (
+            <p className="text-sm text-gray-900 font-semibold">
+              <strong>Formula:</strong> {formula}
+            </p>
+          )}
+          {example && (
+            <p className="text-sm text-gray-900 mt-2">
+              <strong>Example:</strong> {example}
+            </p>
+          )}
+        </div>
+        {/* Footer */}
+        {footer && (
+          <div className="text-xs text-gray-500 mt-auto pt-2 border-t border-gray-200">
+            {footer}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
