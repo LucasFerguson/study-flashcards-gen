@@ -8,6 +8,8 @@ import { useRef, useState, useEffect, forwardRef } from "react";
 
 import cards from "./cards.json"
 import ReactMarkdown from "react-markdown";
+import remarkBreaks from 'remark-breaks';
+import remarkGfm from "remark-gfm";
 
 // DPI setting
 const DPI = 150;  // Standard screen DPI (old val 96)
@@ -54,7 +56,7 @@ export default function Home() {
       subject: "System",
       subjectColor: "#5e40f2",
       title: "Morning Routine",
-      description: "Wake Up 9:00 am\n    Alexa + Phone + Watch Alarms ⏰\nHABIT 1\n    💧 Drink Water for energy ⚡\nHABIT 2\n    🚿 Take Shower\nHABIT 3\n    👕 Get Dressed\nHABIT 4\n    ✂ Shave face\nHABIT 5\n    🚶 Start Walking to Class\nHABIT 6\n📃 Check TODOs and Calendar 📆",
+      description: "Wake Up 9:00 am\n - Alexa + Phone + Watch Alarms ⏰ \n\n HABIT 1  \n - 💧 Drink Water for energy ⚡ \n\n HABIT 2\n - 🚿 Take Shower \n\n HABIT 3 \n - 👕 Get Dressed \n\n HABIT 4 \n - ✂ Shave face\n\n HABIT 5\n - 🚶 Start Walking to Class \n\n HABIT 6 \n - 📃 Check TODOs and Calendar 📆",
       formula: "",
       example: "",
       footer: "Created 2025-03-25 by Lucas"
@@ -253,12 +255,28 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
         <div>
           <h2 className="text-xl font-semibold mb-2">{title}</h2>
           <div className="">
-            <p className="text-base text-gray-700 mb-2 whitespace-pre-wrap">{description}</p>
+            {/* <p className="text-base text-gray-700 mb-2 whitespace-pre-wrap">{description}</p> */}
 
             {/* className="whitespace-pre-wrap" */}
-            {/* <ReactMarkdown >
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm, remarkBreaks]}
+              components={{
+                a: ({ node, ...props }) => (
+                  <a {...props} className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer" />
+                ),
+                ul: ({ node, ...props }) => (
+                  <ul {...props} className="list-disc list-inside pl-4 space-y-1" />
+                ),
+                ol: ({ node, ...props }) => (
+                  <ol {...props} className="list-decimal list-inside pl-4 space-y-1" />
+                ),
+                li: ({ node, ...props }) => (
+                  <li {...props} className="text-gray-700" />
+                )
+              }}
+            >
               {description}
-            </ReactMarkdown> */}
+            </ReactMarkdown>
           </div>
           {formula && (
             <p className="text-base text-gray-900 font-light">

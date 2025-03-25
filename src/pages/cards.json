@@ -132,7 +132,7 @@
 		"subject": "Markdown Feature",
 		"subjectColor": "#9B59B6",
 		"title": "Images",
-		"description": "Inline-style image:\n![Alt text](https://www.example.com/image.jpg)\n\nReference-style image:\n![Alt text][image]\n\n[image]: https://www.example.com/image.jpg",
+		"description": "Inline-style image:\n![Alt text](https://assets.tina.io/527417f4-1e11-49fc-b76f-472a04087e96/logo.gif)\n",
 		"footer": "Source: Markdown Guide"
 	},
 	{
