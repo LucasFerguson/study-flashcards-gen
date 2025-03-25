@@ -56,7 +56,7 @@ export default function Home() {
   const allCards = flashcardsData;
 
   // Create refs for all cards
-  const cardRefs = useRef([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Ensure refs array matches card count
   useEffect(() => {
@@ -124,7 +124,17 @@ export default function Home() {
 
 
 
-const Flashcard = forwardRef(({
+interface FlashcardProps {
+  subject: string;
+  subjectColor: string;
+  title: string;
+  description: string;
+  formula?: string;
+  example?: string;
+  footer?: string;
+}
+
+const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
   subject,
   subjectColor,
   title,
