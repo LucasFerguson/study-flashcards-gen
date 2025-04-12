@@ -1,5 +1,61 @@
 [
 	{
+		"subject": "Storage Location",
+		"subjectColor": "#4CAF50",
+		"title": "Tool Storage",
+		"description": "Secure and organize hand tools like screwdrivers, pliers, and soldering irons. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#FF9800",
+		"title": "Robot Storage",
+		"description": "Safely store completed robots and competition-ready builds. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#2196F3",
+		"title": "Parts Storage",
+		"description": "Organize small components like screws, sensors, motors, and gears. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#9C27B0",
+		"title": "Raw Material Storage",
+		"description": "Store bulk materials like wood, acrylic, and metal sheets used in robot construction. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#E91E63",
+		"title": "Electronics Station",
+		"description": "Safely store and organize electronic components such as microcontrollers, sensors, and wiring kits. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#607D8B",
+		"title": "Workbench Storage",
+		"description": "Combine workspace with integrated storage solutions. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#795548",
+		"title": "Safety Equipment Storage",
+		"description": "Store personal protective equipment (PPE) like goggles, gloves, and aprons. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#3F51B5",
+		"title": "Personal Belongings Lockers",
+		"description": "Provide a secure space for students to store personal items during lab sessions. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
 		"subject": "Programming Language",
 		"subjectColor": "#F7DF1E",
 		"title": "JavaScript",

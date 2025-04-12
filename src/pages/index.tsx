@@ -65,7 +65,7 @@ export default function Home() {
 
 
   // Combine all card data
-  const allCards = flashcardsData.concat(JSON.parse(JSON.stringify(cards)));
+  const allCards = JSON.parse(JSON.stringify(cards)).concat(flashcardsData);
 
   // Create refs for all cards
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
