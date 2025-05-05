@@ -11,6 +11,9 @@ import ReactMarkdown from "react-markdown";
 import remarkBreaks from 'remark-breaks';
 import remarkGfm from "remark-gfm";
 
+import QRCode from "react-qr-code";
+
+
 // DPI setting
 const DPI = 150;  // Standard screen DPI (old val 96)
 
@@ -30,6 +33,7 @@ export default function Home() {
       subjectColor: "#4CAF50",
       title: "Pythagorean Theorem",
       description: "In a right triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.",
+      qrCodeURL: "https://www.example.com/pythagorean-theorem",
       formula: "a² + b² = c²",
       example: "If a = 3 and b = 4, then c = 5",
       footer: "Source: Geometry Basics",
@@ -39,6 +43,7 @@ export default function Home() {
       subjectColor: "#2196F3",
       title: "Newton's Second Law",
       description: "Force equals mass times acceleration.",
+      qrCodeURL: "https://www.example.com/newtons-second-law",
       formula: "F = ma",
       example: "If m = 2kg and a = 3m/s², then F = 6N",
       footer: "Source: Physics Fundamentals",
@@ -48,6 +53,7 @@ export default function Home() {
       subjectColor: "#FF5722",
       title: "The American Revolution",
       description: "A political upheaval during which the Thirteen Colonies broke free from British rule.",
+      qrCodeURL: "https://www.example.com/american-revolution",
       formula: "",
       example: "Occurred between 1765 and 1783.",
       footer: "Source: History Textbook",
@@ -216,6 +222,7 @@ interface FlashcardProps {
   subjectColor: string;
   title: string;
   description: string;
+  qrCodeURL?: string;
   formula?: string;
   example?: string;
   footer?: string;
@@ -226,6 +233,7 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
   subjectColor,
   title,
   description,
+  qrCodeURL,
   formula,
   example,
   footer,
@@ -289,6 +297,18 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
             </p>
           )}
         </div>
+        {/* QR CODE  */}
+        {qrCodeURL && (
+          <div className="mt-auto flex justify-center">
+            <QRCode
+              value={qrCodeURL}
+              size={240}
+              bgColor="#ffffff"
+              fgColor="#000000"
+              level="L"
+            />
+          </div>
+        )}
 
         {/* Footer */}
         {footer && (
