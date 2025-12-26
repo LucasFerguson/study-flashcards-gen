@@ -1,0 +1,319 @@
+[
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#4CAF50",
+		"title": "Tool Storage",
+		"description": "Secure and organize hand tools like screwdrivers, pliers, and soldering irons. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#FF9800",
+		"title": "Robot Storage",
+		"description": "Safely store completed robots and competition-ready builds. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#2196F3",
+		"title": "Parts Storage",
+		"description": "Organize small components like screws, sensors, motors, and gears. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#9C27B0",
+		"title": "Raw Material Storage",
+		"description": "Store bulk materials like wood, acrylic, and metal sheets used in robot construction. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#E91E63",
+		"title": "Electronics Station",
+		"description": "Safely store and organize electronic components such as microcontrollers, sensors, and wiring kits. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#607D8B",
+		"title": "Workbench Storage",
+		"description": "Combine workspace with integrated storage solutions. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#795548",
+		"title": "Safety Equipment Storage",
+		"description": "Store personal protective equipment (PPE) like goggles, gloves, and aprons. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Storage Location",
+		"subjectColor": "#3F51B5",
+		"title": "Personal Belongings Lockers",
+		"description": "Provide a secure space for students to store personal items during lab sessions. ![](QR_code_for_mobile_English_Wikipedia.png)",
+		"footer": "Illinois Tech Robotics"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#F7DF1E",
+		"title": "JavaScript",
+		"description": "JavaScript is a versatile, high-level programming language primarily known for enhancing web pages to provide interactive content.",
+		"example": "console.log('Hello, World!');",
+		"footer": "Source: MDN Web Docs"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#3776AB",
+		"title": "Python",
+		"description": "Python is a high-level, interpreted language known for its readability and versatility, widely used in web development, data analysis, and automation.",
+		"example": "print('Hello, World!')",
+		"footer": "Source: Python.org"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#F34B7D",
+		"title": "Java",
+		"description": "Java is a class-based, object-oriented programming language designed to have as few implementation dependencies as possible.",
+		"example": "System.out.println('Hello, World!');",
+		"footer": "Source: Oracle Java Documentation"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#563D7C",
+		"title": "PHP",
+		"description": "PHP is a popular general-purpose scripting language especially suited to web development, fast, flexible, and pragmatic.",
+		"example": "echo 'Hello, World!';",
+		"footer": "Source: PHP.net"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#A8B9CC",
+		"title": "C++",
+		"description": "C++ is a general-purpose programming language created as an extension of the C programming language, known for its performance and efficiency.",
+		"example": "std::cout << 'Hello, World!' << std::endl;",
+		"footer": "Source: ISO C++ Standard"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#B07219",
+		"title": "C#",
+		"description": "C# is a modern, object-oriented, and type-safe programming language, developed by Microsoft for building a wide range of applications.",
+		"example": "Console.WriteLine('Hello, World!');",
+		"footer": "Source: Microsoft Docs"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#2C2D72",
+		"title": "TypeScript",
+		"description": "TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.",
+		"example": "console.log('Hello, World!');",
+		"footer": "Source: TypeScriptlang.org"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#E34C26",
+		"title": "HTML",
+		"description": "HTML is the standard markup language for documents designed to be displayed in a web browser.",
+		"example": "<!DOCTYPE html>\n<html>\n  <body>\n    <p>Hello, World!</p>\n  </body>\n</html>",
+		"footer": "Source: W3C HTML Specification"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#1572B6",
+		"title": "CSS",
+		"description": "CSS is a style sheet language used for describing the presentation of a document written in HTML or XML.",
+		"example": "p { color: red; }",
+		"footer": "Source: MDN Web Docs"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#CC342D",
+		"title": "Ruby",
+		"description": "Ruby is an interpreted, high-level, general-purpose programming language designed for simplicity and productivity.",
+		"example": "puts 'Hello, World!'",
+		"footer": "Source: Ruby-lang.org"
+	},
+	{
+		"subject": "Virtual Reality Component",
+		"subjectColor": "#FF5733",
+		"title": "Tracking",
+		"description": "Tracking systems in VR capture the user's physical movements and translate them into the virtual environment, ensuring accurate representation of actions. Techniques include goniometry for measuring joint angles, fiducial markers resembling QR codes for spatial positioning, and Simultaneous Localization and Mapping (SLAM) for real-time mapping and tracking of the user's location within an unknown environment.",
+		"footer": "Source: ScienceDirect Topics"
+	},
+	{
+		"subject": "Virtual Reality Component",
+		"subjectColor": "#33FF57",
+		"title": "Rendering",
+		"description": "Rendering in VR involves generating the visual output based on the user's head position and orientation, producing images that align with their perspective. This process utilizes the standard computer graphics pipeline, incorporating shape information, colors, lighting, and textures to create realistic and immersive visuals.",
+		"footer": "Source: XR Today"
+	},
+	{
+		"subject": "Virtual Reality Component",
+		"subjectColor": "#3357FF",
+		"title": "Display",
+		"description": "The display component presents the rendered images to the user through devices like head-mounted displays (HMDs). These systems employ lenses and image planes to focus and direct light appropriately. Addressing optical issues such as chromatic aberrations is essential to ensure clear and accurate visuals, enhancing the overall immersive experience.",
+		"footer": "Source: University of Calgary"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#FF5733",
+		"title": "Headings",
+		"description": "# Heading Level 1\n## Heading Level 2\n### Heading Level 3\n#### Heading Level 4\n##### Heading Level 5\n###### Heading Level 6",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#33FF57",
+		"title": "Emphasis",
+		"description": "To *italicize* text, wrap it with single asterisks or underscores.\nTo **bold** text, wrap it with double asterisks or underscores.\nCombine them for ***bold italics***.",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#3357FF",
+		"title": "Lists",
+		"description": "Unordered lists:\n- Item 1\n- Item 2\n  - Subitem 2.1\n  - Subitem 2.2\n\nOrdered lists:\n1. First item\n2. Second item\n   1. Subitem 2.1\n   2. Subitem 2.2",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#F39C12",
+		"title": "Links",
+		"description": "Inline-style link: [OpenAI](https://www.openai.com/)\nReference-style link: [OpenAI][1]\n\n[1]: https://www.openai.com/",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#9B59B6",
+		"title": "Images",
+		"description": "Inline-style image:\n![Alt text](https://assets.tina.io/527417f4-1e11-49fc-b76f-472a04087e96/logo.gif)\n",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#E74C3C",
+		"title": "Blockquotes",
+		"description": "> This is a blockquote.\n>\n> Blockquotes can span multiple lines or paragraphs.",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#1ABC9C",
+		"title": "Code",
+		"description": "Inline code: `print('Hello, World!')`\n\nBlock code:\n```\ndef hello_world():\n    print('Hello, World!')\n```",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#D35400",
+		"title": "Horizontal Rules",
+		"description": "Three or more hyphens, asterisks, or underscores on a line create a horizontal rule:\n\n---\n\n***\n\n___",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#34495E",
+		"title": "Tables",
+		"description": "| Header 1 | Header 2 | Header 3 |\n|----------|----------|----------|\n| Row 1    | Data     | Here     |\n| Row 2    | Data     | Here     |",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Markdown Feature",
+		"subjectColor": "#2ECC71",
+		"title": "Task Lists",
+		"description": "- [x] Completed task\n- [ ] Incomplete task",
+		"footer": "Source: Markdown Guide"
+	},
+	{
+		"subject": "Example Note",
+		"subjectColor": "#2196F3",
+		"title": "Example note 1",
+		"description": "This is the body of Example note 1. It spans multiple lines.",
+		"qrCodeURL": "http://localhost:5000/sa8A4",
+		"formula": "",
+		"example": "",
+		"footer": "Source: User Notes"
+	},
+	{
+		"subject": "Report",
+		"subjectColor": "#4CAF50",
+		"title": "Weekly Report",
+		"description": "## Weekly Summary\n\n- Completed milestone 1\n- Prepared for client demo",
+		"qrCodeURL": "http://localhost:5000/bX91Z",
+		"formula": "",
+		"example": "",
+		"footer": "Source: User Notes"
+	},
+	{
+		"subject": "Meeting",
+		"subjectColor": "#FF9800",
+		"title": "Meeting Notes - April 28",
+		"description": "- Discussed project timeline\n- Action item: Review requirements",
+		"qrCodeURL": "http://localhost:5000/A2c9p",
+		"formula": "",
+		"example": "",
+		"footer": "Source: User Notes"
+	},
+	{
+		"subject": "Tasks",
+		"subjectColor": "#9C27B0",
+		"title": "Todo List",
+		"description": "- [ ] Buy groceries\n- [x] Fix the Unity script\n- [ ] Email team",
+		"qrCodeURL": "http://localhost:5000/Zk19X",
+		"formula": "",
+		"example": "",
+		"footer": "Source: User Notes"
+	},
+	{
+		"subject": "System Summary",
+		"subjectColor": "#2196F3",
+		"title": "Laptop System Summary",
+		"description": "# Lucas' Laptop Computer System Summary:\n**System Model**: HP ENVY x360 Convertible 15m-ee0xxx\n**OS Name**: Microsoft Windows 10",
+		"qrCodeURL": "http://localhost:5000/Qw3rT",
+		"formula": "",
+		"example": "",
+		"footer": "Source: User Notes"
+	},
+	{
+		"subject": "System Summary",
+		"subjectColor": "#2196F3",
+		"title": "Desktop System Summary",
+		"description": "Lucas' Desktop System Summary:\n**OS Name**: Microsoft Windows 10",
+		"qrCodeURL": "http://localhost:5000/XyZ12",
+		"formula": "",
+		"example": "",
+		"footer": "Source: User Notes"
+	},
+	{
+		"subject": "Networking Equipment",
+		"subjectColor": "#009688",
+		"title": "Main Switch Rack 1",
+		"description": "Main Switch Rack 1 (Data Center):\n**Device**: Cisco Catalyst 9300 Series\n**Location**: Server Room A, Rack 1",
+		"qrCodeURL": "http://localhost:5000/SwA01",
+		"formula": "",
+		"example": "",
+		"footer": "Source: User Notes"
+	},
+	{
+		"subject": "Networking Equipment",
+		"subjectColor": "#009688",
+		"title": "Conference Room Access Point",
+		"description": "Conference Room Wireless Access Point:\n**Device**: Ubiquiti UniFi 6 Long-Range\n**Location**: Ceiling, Conference Room C",
+		"qrCodeURL": "http://localhost:5000/ApC12",
+		"formula": "",
+		"example": "",
+		"footer": "Source: User Notes"
+	},
+	{
+		"subject": "Networking Equipment",
+		"subjectColor": "#009688",
+		"title": "Patch Panel B7",
+		"description": "Patch Panel B7 (West Wing):\n**Type**: Cat6 24-Port Patch Panel\n**Location**: Network Closet B, Wall Rack",
+		"qrCodeURL": "http://localhost:5000/PtB07",
+		"formula": "",
+		"example": "",
+		"footer": "Source: User Notes"
+	}
+]

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 
 import { toPng } from "html-to-image";
-import { useRef, useState, useEffect, forwardRef } from "react";
+import { useRef, useState, useEffect, forwardRef, Dispatch, SetStateAction, RefObject } from "react";
 
 import cards from "./cards.json"
 import ReactMarkdown from "react-markdown";
@@ -22,6 +22,16 @@ const CARD_WIDTH_PX = 2.5 * DPI;   // 2.5in
 const CARD_HEIGHT_PX = 3.5 * DPI;  // 3.5in
 const PAGE_WIDTH_PX = 11 * DPI;    // 11in
 const PAGE_HEIGHT_PX = 8.5 * DPI;  // 8.5in
+
+const emptyCard: FlashcardProps = {
+  subject: "",
+  subjectColor: "#4CAF50",
+  title: "",
+  description: "",
+  formula: "",
+  example: "",
+  footer: ""
+};
 
 export default function Home() {
   // const hello = api.post.hello.useQuery({ text: "from tRPC" });
@@ -71,16 +81,63 @@ export default function Home() {
 
 
   // Combine all card data
-  const allCards = JSON.parse(JSON.stringify(cards)).concat(flashcardsData);
+  const baseCards = JSON.parse(JSON.stringify(cards)) as FlashcardProps[];
+  const allCards = baseCards.concat(flashcardsData);
+
+  const [editorCard, setEditorCard] = useState<FlashcardProps>(emptyCard);
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [saveError, setSaveError] = useState<string>("");
 
   // Create refs for all cards
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const editorSectionRef = useRef<HTMLDivElement>(null);
+
+  const handleEditCard = (card: FlashcardProps, index: number, editable: boolean) => {
+    if (!editable) return;
+    setEditorCard({ ...emptyCard, ...card });
+    setEditingIndex(index);
+    if (editorSectionRef.current) {
+      editorSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   // Ensure refs array matches card count
   useEffect(() => {
     console.log("useEffect - All cards:", allCards);
     console.log("Populated cardRefs:", cardRefs.current); // Logs after rendering
   }, [allCards]);
+
+  // Auto-save changes to existing cards.json entries when editing
+  useEffect(() => {
+    if (editingIndex === null) return;
+
+    const timeout = setTimeout(async () => {
+      try {
+        setSaveStatus("saving");
+        setSaveError("");
+        const response = await fetch("/api/cards", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ index: editingIndex, card: editorCard }),
+        });
+
+        if (!response.ok) {
+          const data = await response.json().catch(() => null);
+          throw new Error(data?.error || "Failed to save card");
+        }
+
+        setSaveStatus("saved");
+      } catch (err) {
+        console.error("Auto-save failed", err);
+        setSaveStatus("error");
+        setSaveError(err instanceof Error ? err.message : "Unknown error");
+      }
+    }, 600);
+
+    return () => clearTimeout(timeout);
+  }, [editorCard, editingIndex]);
 
   const handleExportAll = () => {
     console.log("Exporting all cards as PNGs...");
@@ -137,7 +194,14 @@ export default function Home() {
 
 
           {/* add card editor */}
-          <CardEditor />
+          <CardEditor
+            card={editorCard}
+            setCard={setEditorCard}
+            editorRef={editorSectionRef}
+            saveStatus={saveStatus}
+            saveError={saveError}
+            isEditingBaseCard={editingIndex !== null}
+          />
 
           {/* Export All Button */}
           <button
@@ -149,13 +213,17 @@ export default function Home() {
 
           {/* Flashcards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {allCards.map((card, index) => (
-              <Flashcard
-                key={index}
-                ref={(el) => (cardRefs.current[index] = el)} // Assign refs dynamically
-                {...card}
-              />
-            ))}
+            {allCards.map((card, index) => {
+              const isEditable = index < baseCards.length;
+              return (
+                <Flashcard
+                  key={index}
+                  ref={(el) => (cardRefs.current[index] = el)} // Assign refs dynamically
+                  onEdit={isEditable ? () => handleEditCard(card, index, isEditable) : undefined}
+                  {...card}
+                />
+              );
+            })}
           </div>
         </div>
 
@@ -228,7 +296,20 @@ interface FlashcardProps {
   footer?: string;
 }
 
-const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
+interface FlashcardComponentProps extends FlashcardProps {
+  onEdit?: () => void;
+}
+
+interface CardEditorProps {
+  card: FlashcardProps;
+  setCard: Dispatch<SetStateAction<FlashcardProps>>;
+  editorRef?: RefObject<HTMLDivElement>;
+  saveStatus?: "idle" | "saving" | "saved" | "error";
+  saveError?: string;
+  isEditingBaseCard?: boolean;
+}
+
+const Flashcard = forwardRef<HTMLDivElement, FlashcardComponentProps>(({
   subject,
   subjectColor,
   title,
@@ -237,12 +318,13 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
   formula,
   example,
   footer,
+  onEdit
 }, ref) => {
 
   return (
     <div
       ref={ref}
-      className="border rounded-lg shadow-lg flex flex-col overflow-hidden"
+      className="border rounded-lg shadow-lg flex flex-col overflow-hidden relative"
       style={{
         borderColor: subjectColor,
         backgroundColor: subjectColor,
@@ -250,6 +332,15 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
         height: `${CARD_HEIGHT_PX}px`
       }}
     >
+      {onEdit && (
+        <button
+          type="button"
+          onClick={onEdit}
+          className="print:hidden absolute top-2 right-2 bg-white/90 text-gray-800 text-xs px-2 py-1 rounded shadow hover:bg-gray-100"
+        >
+          Edit
+        </button>
+      )}
       {/* Subject Banner */}
       <div
         className="text-white text-center py-1"
@@ -322,17 +413,7 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(({
 });
 
 
-const CardEditor: React.FC = () => {
-  const [card, setCard] = useState<FlashcardProps>({
-    subject: "",
-    subjectColor: "#4CAF50",
-    title: "",
-    description: "",
-    formula: "",
-    example: "",
-    footer: ""
-  });
-
+const CardEditor: React.FC<CardEditorProps> = ({ card, setCard, editorRef, saveStatus = "idle", saveError = "", isEditingBaseCard = false }) => {
   const previewRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -368,8 +449,24 @@ const CardEditor: React.FC = () => {
   };
 
   return (
-    <div className="flex gap-8 items-start w-full max-w-4xl">
+    <div ref={editorRef} className="flex gap-8 items-start w-full max-w-4xl">
       <form onSubmit={handleSubmit} className="flex-1 bg-white p-6 rounded-lg shadow-lg">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-semibold">Card Editor</h2>
+            {card.title && (
+              <span className="text-sm text-gray-500">{isEditingBaseCard ? "Editing existing card" : "New card"}: {card.title}</span>
+            )}
+          </div>
+          <div className="text-sm text-gray-500 flex items-center gap-3">
+            {isEditingBaseCard && (
+              <span className="text-blue-600">Auto-save on change</span>
+            )}
+            {saveStatus === "saving" && <span className="text-amber-600">Saving…</span>}
+            {saveStatus === "saved" && <span className="text-green-600">Saved</span>}
+            {saveStatus === "error" && <span className="text-red-600">Error: {saveError}</span>}
+          </div>
+        </div>
         <div className="flex flex-wrap mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2">

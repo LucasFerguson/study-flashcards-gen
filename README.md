@@ -10,3 +10,10 @@ Uses
 Created 2025-04-17 by Lucas Ferguson
 
 
+## Editing existing cards
+- Cards shipped in `src/pages/cards.json` now show an **Edit** button on each card.
+- Clicking **Edit** loads that card into the top **Card Editor** form so you can adjust the fields with live preview.
+- Changes to these base cards auto-save (debounced) back to `src/pages/cards.json` via `/api/cards` while you type. (Requires a writable server, e.g., local dev.)
+- Cards defined inline in code (e.g., sample/demo cards) are view-only and do not auto-save.
+
+

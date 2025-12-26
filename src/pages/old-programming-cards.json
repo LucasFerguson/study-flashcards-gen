@@ -1,0 +1,82 @@
+[
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#F7DF1E",
+		"title": "JavaScript",
+		"description": "JavaScript is a versatile, high-level programming language primarily known for enhancing web pages to provide interactive content.",
+		"example": "console.log('Hello, World!');",
+		"footer": "Source: MDN Web Docs"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#3776AB",
+		"title": "Python",
+		"description": "Python is a high-level, interpreted language known for its readability and versatility, widely used in web development, data analysis, and automation.",
+		"example": "print('Hello, World!')",
+		"footer": "Source: Python.org"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#F34B7D",
+		"title": "Java",
+		"description": "Java is a class-based, object-oriented programming language designed to have as few implementation dependencies as possible.",
+		"example": "System.out.println('Hello, World!');",
+		"footer": "Source: Oracle Java Documentation"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#563D7C",
+		"title": "PHP",
+		"description": "PHP is a popular general-purpose scripting language especially suited to web development, fast, flexible, and pragmatic.",
+		"example": "echo 'Hello, World!';",
+		"footer": "Source: PHP.net"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#A8B9CC",
+		"title": "C++",
+		"description": "C++ is a general-purpose programming language created as an extension of the C programming language, known for its performance and efficiency.",
+		"example": "std::cout << 'Hello, World!' << std::endl;",
+		"footer": "Source: ISO C++ Standard"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#B07219",
+		"title": "C#",
+		"description": "C# is a modern, object-oriented, and type-safe programming language, developed by Microsoft for building a wide range of applications.",
+		"example": "Console.WriteLine('Hello, World!');",
+		"footer": "Source: Microsoft Docs"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#2C2D72",
+		"title": "TypeScript",
+		"description": "TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.",
+		"example": "console.log('Hello, World!');",
+		"footer": "Source: TypeScriptlang.org"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#E34C26",
+		"title": "HTML",
+		"description": "HTML is the standard markup language for documents designed to be displayed in a web browser.",
+		"example": "<!DOCTYPE html>\n<html>\n  <body>\n    <p>Hello, World!</p>\n  </body>\n</html>",
+		"footer": "Source: W3C HTML Specification"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#1572B6",
+		"title": "CSS",
+		"description": "CSS is a style sheet language used for describing the presentation of a document written in HTML or XML.",
+		"example": "p { color: red; }",
+		"footer": "Source: MDN Web Docs"
+	},
+	{
+		"subject": "Programming Language",
+		"subjectColor": "#CC342D",
+		"title": "Ruby",
+		"description": "Ruby is an interpreted, high-level, general-purpose programming language designed for simplicity and productivity.",
+		"example": "puts 'Hello, World!'",
+		"footer": "Source: Ruby-lang.org"
+	}
+]
