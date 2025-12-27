@@ -4,6 +4,7 @@ import { Geist } from "next/font/google";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
+import "highlight.js/styles/github.css";
 
 const geist = Geist({
   subsets: ["latin"],

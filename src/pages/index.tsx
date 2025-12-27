@@ -10,6 +10,7 @@ import cards from "./cards.json"
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from 'remark-breaks';
 import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 
 import QRCode from "react-qr-code";
 
@@ -31,6 +32,43 @@ const emptyCard: FlashcardProps = {
   formula: "",
   example: "",
   footer: ""
+};
+
+const markdownComponents = {
+  a: ({ node, ...props }: any) => (
+    <a {...props} className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer" />
+  ),
+  pre: ({ node, ...props }: any) => (
+    <pre
+      {...props}
+      className="code-block bg-gray-900 text-gray-100 text-[11px] leading-tight p-2 rounded-md overflow-auto whitespace-pre-wrap break-words my-1"
+    />
+  ),
+  code: ({ node, inline, className, ...props }: any) => {
+    if (inline) {
+      return (
+        <code
+          className="bg-gray-100 text-gray-800 px-1 py-[1px] rounded text-[12px]"
+          {...props}
+        />
+      );
+    }
+    return (
+      <code
+        className={`code-inline-block ${className || ""} text-[11px] leading-tight`}
+        {...props}
+      />
+    );
+  },
+  ul: ({ node, ...props }: any) => (
+    <ul {...props} className="list-disc list-inside pl-4 space-y-1" />
+  ),
+  ol: ({ node, ...props }: any) => (
+    <ol {...props} className="list-decimal list-inside pl-4 space-y-1" />
+  ),
+  li: ({ node, ...props }: any) => (
+    <li {...props} className="text-gray-700" />
+  )
 };
 
 export default function Home() {
@@ -82,7 +120,7 @@ export default function Home() {
 
   // Combine all card data
   const baseCards = JSON.parse(JSON.stringify(cards)) as FlashcardProps[];
-  const allCards = baseCards.concat(flashcardsData);
+  const allCards = baseCards // .concat(flashcardsData);
 
   const [editorCard, setEditorCard] = useState<FlashcardProps>(emptyCard);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -353,26 +391,14 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardComponentProps>(({
       <div className="flex-grow p-2 bg-white flex flex-col justify-between rounded-md mx-2 mb-1 shadow-sm">
         <div>
           <h2 className="text-xl font-semibold mb-2">{title}</h2>
-          <div className="">
+          <div className="text-sm text-gray-700 leading-snug">
             {/* <p className="text-base text-gray-700 mb-2 whitespace-pre-wrap">{description}</p> */}
 
             {/* className="whitespace-pre-wrap" */}
             <ReactMarkdown
               remarkPlugins={[remarkGfm, remarkBreaks]}
-              components={{
-                a: ({ node, ...props }) => (
-                  <a {...props} className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer" />
-                ),
-                ul: ({ node, ...props }) => (
-                  <ul {...props} className="list-disc list-inside pl-4 space-y-1" />
-                ),
-                ol: ({ node, ...props }) => (
-                  <ol {...props} className="list-decimal list-inside pl-4 space-y-1" />
-                ),
-                li: ({ node, ...props }) => (
-                  <li {...props} className="text-gray-700" />
-                )
-              }}
+              rehypePlugins={[rehypeHighlight]}
+              components={markdownComponents}
             >
               {description}
             </ReactMarkdown>
@@ -383,9 +409,16 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardComponentProps>(({
             </p>
           )}
           {example && (
-            <p className="text-base text-gray-900 mt-1 font-light">
-              <strong>Example:</strong> {example}
-            </p>
+            <div className="text-sm text-gray-900 mt-1 font-light space-y-1">
+              <strong>Example:</strong>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm, remarkBreaks]}
+                rehypePlugins={[rehypeHighlight]}
+                components={markdownComponents}
+              >
+                {example}
+              </ReactMarkdown>
+            </div>
           )}
         </div>
         {/* QR CODE  */}
@@ -515,7 +548,7 @@ const CardEditor: React.FC<CardEditorProps> = ({ card, setCard, editorRef, saveS
               value={card.description}
               onChange={handleChange}
               className="w-full border rounded px-3 py-2 mt-1"
-              rows={3}
+              rows={15}
             />
           </label>
         </div>
@@ -536,12 +569,12 @@ const CardEditor: React.FC<CardEditorProps> = ({ card, setCard, editorRef, saveS
         <div className="mb-6">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Example
-            <input
-              type="text"
+            <textarea
               name="example"
               value={card.example}
               onChange={handleChange}
               className="w-full border rounded px-3 py-2 mt-1"
+              rows={3}
             />
           </label>
         </div>

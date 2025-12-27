@@ -4,30 +4,34 @@
     "subjectColor": "#607D8B",
     "title": "Programming Language Emoji Key",
     "description": "## Type System\n- 🧱 Statically Typed\n- 🌊 Dynamically Typed\n\n## Execution Model\n- ⚙️ Compiled\n- 🧠 Interpreted or JIT\n\n## Domain Indicators\n- 🌐 Web-focused ecosystem\n- 🚀 Performance-critical / systems-level\n- 🤖 Robotics / embedded / hardware-adjacent\n\n---\nThese emojis appear in the **card titles** to quickly communicate language characteristics at a glance.",
-    "footer": "Source: User-defined Convention"
+    "footer": "Source: User-defined Convention",
+    "formula": "",
+    "example": ""
   },
   {
     "subject": "Programming Language",
     "subjectColor": "#F7DF1E",
     "title": "JavaScript 🌊 🧠 🌐",
-    "description": "## Overview\nJavaScript is a dynamically typed, garbage-collected language built around an **event-driven, single-threaded execution model**.\n\n## Runtime Model\n- Browser engines (V8, SpiderMonkey)\n- Node.js, Deno, Bun\n- Async I/O via event loop\n\n## Major Libraries and Tooling\n- **Frontend**: React, Vue, Svelte\n- **Meta-frameworks**: Next.js, Nuxt\n- **Backend**: Express, Fastify, Hono\n- **Build/Tooling**: Vite, Webpack, ESLint, Jest\n\n## Strengths\n- Dominates client-side web\n- Massive ecosystem\n- Excellent async ergonomics",
-    "example": "console.log('Hello, World!');",
-    "footer": "Source: MDN Web Docs"
+    "description": "JavaScript is a dynamically typed, garbage-collected language built around an **event-driven, single-threaded execution model**.\n\n## Runtime Model\n- Browser engines (V8, SpiderMonkey)\n- Node.js, Deno, Bun\n- Async I/O via event loop\n\n## Major Libraries and Tooling\n- **Frontend**: React, Vue, Svelte\n- **Meta-frameworks**: Next.js, Nuxt\n- **Backend**: Express, Fastify, Hono\n- **Build/Tooling**: Vite, Webpack, ESLint, Jest",
+    "example": "```js\nconsole.log('Hello, World!');\n```",
+    "footer": "Source: MDN Web Docs",
+    "formula": ""
   },
   {
     "subject": "Programming Language",
     "subjectColor": "#3776AB",
     "title": "Python 🌊 🧠",
-    "description": "## Overview\nPython is a dynamically typed, interpreted language optimized for **readability, rapid iteration, and glue code**.\n\n## Execution Model\n- CPython interpreter\n- GIL-managed threading\n- Native extensions for performance\n\n## Major Libraries and Tooling\n- **Data/ML**: NumPy, Pandas, PyTorch, TensorFlow\n- **Vision**: OpenCV, Tesseract\n- **Web**: FastAPI, Flask, Django\n- **Automation**: Click, Rich, Fabric\n\n## Personal Usage\n- Used in **ocr-image-to-excalidraw** for OCR pipelines",
-    "example": "print('Hello, World!')",
-    "footer": "Source: Python.org"
+    "description": "Python is a dynamically typed, interpreted language optimized for **readability, rapid iteration, and glue code**.\n\n## Execution Model\n- CPython interpreter\n\n## Major Libraries and Tooling\n- **Data/ML**: NumPy, Pandas, PyTorch, TensorFlow\n- **Vision**: OpenCV, Tesseract\n- **Web**: FastAPI, Flask, Django\n\n## Personal Usage\n- Used in **ocr-image-to-excalidraw** for OCR pipelines",
+    "example": "```python\nprint('Hello, World!')\n```",
+    "footer": "Source: Python.org",
+    "formula": ""
   },
   {
     "subject": "Programming Language",
     "subjectColor": "#F34B7D",
     "title": "Java 🧱 🧠 🤖",
-    "description": "## Overview\nJava is a statically typed, JVM-based language emphasizing **portability, strong tooling, and long-lived systems**.\n\n## Runtime Model\n- JVM with JIT compilation\n- Garbage-collected memory\n- Strong backward compatibility\n\n## Major Libraries and Tooling\n- **Enterprise**: Spring Boot, Hibernate\n- **Build**: Maven, Gradle\n- **Testing**: JUnit, Mockito\n- **Robotics**: WPILib (FIRST Robotics)",
-    "example": "System.out.println('Hello, World!');",
+    "description": "Java is a statically typed, JVM-based language emphasizing **portability, strong tooling, and long-lived systems**.\n\n## Runtime Model\n- JVM with JIT compilation\n- Garbage-collected memory\n- Strong backward compatibility\n\n## Major Libraries and Tooling\n- **Enterprise**: Spring Boot, Hibernate\n- **Build**: Maven, Gradle\n- **Testing**: JUnit, Mockito\n- **Robotics**: WPILib (FIRST Robotics)",
+    "example": "```java\nSystem.out.println(\"Hello, World!\");\n```",
     "footer": "Source: Oracle Java Documentation",
     "formula": ""
   },
@@ -35,8 +39,8 @@
     "subject": "Programming Language",
     "subjectColor": "#A8B9CC",
     "title": "C++ 🧱 ⚙️ 🚀",
-    "description": "## Overview\nC++ is a statically typed, compiled systems language offering **explicit control over memory and performance**.\n\n## Execution Model\n- Ahead-of-time compilation\n- RAII-based memory management\n- Zero-cost abstractions\n\n## Major Libraries and Tooling\n- **Core**: STL, Boost\n- **Build**: CMake, Meson\n- **Engines**: Unreal Engine\n- **Vision**: OpenCV",
-    "example": "std::cout << \"Hello, World!\" << std::endl;",
+    "description": "C++ is a statically typed, compiled systems language offering **explicit control over memory and performance**.\n\n## Execution Model\n- Ahead-of-time compilation\n- RAII-based memory management\n- Zero-cost abstractions\n\n## Major Libraries and Tooling\n- **Core**: STL, Boost\n- **Build**: CMake, Meson\n- **Engines**: Unreal Engine\n- **Vision**: OpenCV",
+    "example": "```cpp\nstd::cout << \"Hello, World!\" << std::endl;\n```",
     "footer": "Source: ISO C++ Standard",
     "formula": ""
   },
@@ -44,32 +48,36 @@
     "subject": "Programming Language",
     "subjectColor": "#2C2D72",
     "title": "TypeScript 🧱 🧠 🌐",
-    "description": "## Overview\nTypeScript adds a **structural static type system** on top of JavaScript.\n\n## Type System\n- Compile-time only\n- Structural typing\n- Advanced generics\n\n## Major Libraries and Tooling\n- **Frontend**: React, Angular\n- **Backend**: NestJS, tRPC\n- **Schema/Types**: Zod, Prisma\n\n## Strengths\n- Safer refactors\n- Excellent editor tooling\n- Scales well for large apps",
-    "example": "console.log('Hello, World!');",
-    "footer": "Source: TypeScriptlang.org"
+    "description": "TypeScript adds a **structural static type system** on top of JavaScript.\n\n## Type System\n- Compile-time only\n- Structural typing\n\n## Major Libraries and Tooling\n- **Frontend**: React, Angular\n- **Backend**: NestJS, tRPC\n- **Schema/Types**: Zod, Prisma\n\n## Strengths\n- Safer refactors\n- Excellent editor tooling\n- Scales well for large apps",
+    "example": "```ts\nconsole.log('Hello, World!');\n```",
+    "footer": "Source: TypeScriptlang.org",
+    "formula": ""
   },
   {
     "subject": "Programming Language",
     "subjectColor": "#E34C26",
     "title": "HTML 📄 🌐",
-    "description": "## Overview\nHTML is a declarative markup language defining **document structure and semantics** on the web.\n\n## Core Concepts\n- Semantic elements\n- Accessibility (ARIA)\n- DOM integration\n\n## Ecosystem\n- HTML5 APIs\n- Web Components\n- SEO tooling",
-    "example": "<!DOCTYPE html>\n<html>\n  <body>\n    <p>Hello, World!</p>\n  </body>\n</html>",
-    "footer": "Source: W3C HTML Specification"
+    "description": "HTML is a declarative markup language defining **document structure and semantics** on the web.\n\n## Core Concepts\n- Semantic elements\n- Accessibility (ARIA)\n- DOM integration\n\n## Ecosystem\n- HTML5 APIs like Canvas\n- Web Components\n- SEO tooling",
+    "example": "```html\n<html>\n  <body>\n    <p>Hello, World!</p>\n  </body>\n</html>\n```",
+    "footer": "Source: W3C HTML Specification",
+    "formula": ""
   },
   {
     "subject": "Programming Language",
     "subjectColor": "#1572B6",
     "title": "CSS 🎨 🌐",
-    "description": "## Overview\nCSS defines **layout, visual presentation, and responsive behavior** of web documents.\n\n## Modern Capabilities\n- Flexbox and Grid\n- Animations and transitions\n- Container queries\n\n## Ecosystem\n- Tailwind CSS\n- Sass, PostCSS\n- CSS Modules",
-    "example": "p { color: red; }",
-    "footer": "Source: MDN Web Docs"
+    "description": "CSS defines **layout, visual presentation, and responsive behavior** of web documents.\n\n## Modern Capabilities\n- Flexbox and Grid\n- Animations and transitions\n- Container queries\n\n## Ecosystem\n- Tailwind CSS\n- Sass, PostCSS\n- CSS Modules",
+    "example": "```css\np {\n  color: red;\n}\n```",
+    "footer": "Source: MDN Web Docs",
+    "formula": ""
   },
   {
     "subject": "Programming Language",
     "subjectColor": "#CC342D",
     "title": "Ruby 🌊 🧠",
-    "description": "## Overview\nRuby is a dynamically typed language optimized for **developer productivity and expressiveness**.\n\n## Runtime Model\n- Interpreted with GC\n- Highly reflective\n\n## Major Libraries and Tooling\n- Ruby on Rails\n- Bundler\n- RSpec, Sidekiq\n\n## Strengths\n- Rapid application development\n- Convention over configuration",
-    "example": "puts 'Hello, World!'",
-    "footer": "Source: Ruby-lang.org"
+    "description": "Ruby is a dynamically typed language optimized for **developer productivity and expressiveness**.\n\n## Runtime Model\n- Interpreted with GC\n- Highly reflective\n\n## Major Libraries and Tooling\n- Ruby on Rails\n- Bundler\n- RSpec, Sidekiq\n\n## Strengths\n- Rapid application development\n- Convention over configuration",
+    "example": "```ruby\nputs 'Hello, World!'\n```",
+    "footer": "Source: Ruby-lang.org",
+    "formula": ""
   }
 ]
