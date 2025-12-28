@@ -24,20 +24,48 @@ All flashcards are stored in `src/pages/cards.json` as a JSON array. Each card o
 
 Each card is a JSON object with the following fields:
 
-| Field | Type | Description | Notes |
-|-------|------|-------------|-------|
-| `subject` | string | The category or subject area of the card | Used for filtering and grouping cards (e.g., "Programming Language", "Calculus", "Biology", "History") |
-| `subjectColor` | string | Hex color code for visual identification | Format: `#RRGGBB` (e.g., `#F7DF1E`) |
-| `title` | string | The main heading of the card | Can include emojis for quick visual tagging |
-| `description` | string | The primary learning content | Supports **Markdown formatting** (bold, lists, headers, etc.) |
-| `example` | string | Practical example, code snippet, or illustration | Can contain **Markdown code blocks** with language syntax highlighting; leave empty for non-technical subjects |
-| `footer` | string | Citation or source attribution | e.g., "Source: Textbook Name" or "Source: MDN Web Docs" |
-| `formula` | string | Mathematical formula, equation, or technical reference | Optional; can be empty or use LaTeX notation; useful for STEM subjects |
+| Field | Type | Required | Description | Notes |
+|-------|------|----------|-------------|-------|
+| `id` | string | Optional | Unique identifier for the card | Used as a stable key for auto-save operations. For programming language cards, use slugs like `js`, `python`, `java`, etc. If omitted, the card uses title-based identification. |
+| `subject` | string | **Yes** | The category or subject area of the card | Used for filtering and grouping cards (e.g., "Programming Language", "Calculus", "Biology", "History") |
+| `subjectColor` | string | Optional | Hex color code for visual identification | Format: `#RRGGBB` (e.g., `#F7DF1E`). If omitted, defaults to a subject-based color or neutral gray (`#9E9E9E`). See **Color Defaults** section below. |
+| `title` | string | **Yes** | The main heading of the card | Can include emojis for quick visual tagging |
+| `description` | string | **Yes** | The primary learning content | Supports **Markdown formatting** (bold, lists, headers, etc.) |
+| `example` | string | Optional | Practical example, code snippet, or illustration | Can contain **Markdown code blocks** with language syntax highlighting. If omitted or empty, renders nothing. For non-technical subjects, can be illustrations or descriptive examples. |
+| `footer` | string | Optional | Citation or source attribution | e.g., "Source: Textbook Name" or "Source: MDN Web Docs". If omitted, renders nothing. |
+| `formula` | string | Optional | Mathematical formula, equation, or technical reference | Can use LaTeX notation. Useful for STEM subjects. If omitted or empty, renders nothing. |
 
-### Example Card (Complete)
+### Optional Field Behavior
+
+The following fields are truly optional and follow these rules:
+
+- **`example`**: If missing or empty string (`""`), the example section **renders nothing**. Use this for subjects where examples aren't applicable (e.g., historical events, abstract concepts).
+- **`formula`**: If missing or empty string (`""`), the formula section **renders nothing**. Use this for subjects without mathematical notation.
+- **`subjectColor`**: If missing, the component automatically selects a default color based on the `subject` field. See **Color Defaults** section.
+
+### Color Defaults
+
+If `subjectColor` is omitted, the system automatically assigns a color based on the `subject` value:
+
+```
+"Programming Language"  → #9E9E9E (Neutral Gray)
+"Math"                  → #4CAF50 (Green)
+"Science"               → #2196F3 (Blue)
+"History"               → #FF5722 (Deep Orange)
+"Biology"               → #4CAF50 (Green)
+"Chemistry"             → #FF9800 (Orange)
+"Legend"                → #607D8B (Blue Gray)
+"System"                → #5e40f2 (Purple)
+[any other subject]     → #9E9E9E (Neutral Gray fallback)
+```
+
+To override the default for a subject, explicitly provide `subjectColor` in the card object.
+
+### Example Card (Complete, with all optional fields)
 
 ```json
 {
+  "id": "js",
   "subject": "Programming Language",
   "subjectColor": "#F7DF1E",
   "title": "JavaScript 🌊 🧠 🌐",
@@ -47,6 +75,25 @@ Each card is a JSON object with the following fields:
   "formula": ""
 }
 ```
+
+### Example Card (Minimal, relying on defaults)
+
+```json
+{
+  "id": "my-concept",
+  "subject": "Math",
+  "title": "Pythagorean Theorem",
+  "description": "In a right triangle, the square of the hypotenuse equals the sum of the squares of the other two sides.\n\n**Key Formula**: a² + b² = c²"
+}
+```
+
+In this minimal example:
+- `subjectColor` is omitted → defaults to `#4CAF50` (green) based on "Math" subject
+- `example` is omitted → example section renders nothing
+- `formula` is omitted → formula section renders nothing
+- `footer` is omitted → footer section renders nothing
+
+
 
 ### Content Guidelines for Rich Details
 
@@ -83,13 +130,21 @@ Each card is a JSON object with the following fields:
 - For **other subjects**, use emojis creatively to aid memory and visual scanning
 
 **Footer Field:**
-- Always include attribution (e.g., "Source: Course Notes", "Source: Textbook Name", "Source: Lecture 5")
-- Keep brief but informative
+- Include attribution when available (e.g., "Source: Course Notes", "Source: Textbook Name", "Source: Lecture 5")
+- Optional; leave empty or omit if not applicable
 
 **Formula Field:**
 - Use for mathematical equations, chemical formulas, or technical notation
-- Leave empty for cards where it doesn't apply
+- Optional; leave empty or omit if not applicable
 - Can use LaTeX notation if needed
+
+**ID Field:**
+- Optional; used as a stable identifier for auto-save operations
+- For **programming language cards**, use short slugs like `js`, `python`, `java`, `cpp`, `ts`, `html`, `css`, `ruby`
+- For other cards, use kebab-case slugs (e.g., `pythagorean-theorem`, `newtons-second-law`)
+- Must be unique within your card set
+- If omitted, the system uses the card title as a fallback identifier
+
 
 ### Minimal Example Card (Non-Programming Subject)
 

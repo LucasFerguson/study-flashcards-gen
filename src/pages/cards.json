@@ -1,5 +1,6 @@
 [
   {
+    "id": "legend",
     "subject": "Legend",
     "subjectColor": "#607D8B",
     "title": "Programming Language Emoji Key",
@@ -9,6 +10,7 @@
     "example": ""
   },
   {
+    "id": "js",
     "subject": "Programming Language",
     "subjectColor": "#F7DF1E",
     "title": "JavaScript 🌊 🧠 🌐",
@@ -18,6 +20,7 @@
     "formula": ""
   },
   {
+    "id": "python",
     "subject": "Programming Language",
     "subjectColor": "#3776AB",
     "title": "Python 🌊 🧠",
@@ -27,6 +30,7 @@
     "formula": ""
   },
   {
+    "id": "java",
     "subject": "Programming Language",
     "subjectColor": "#F34B7D",
     "title": "Java 🧱 🧠 🤖",
@@ -36,6 +40,7 @@
     "formula": ""
   },
   {
+    "id": "cpp",
     "subject": "Programming Language",
     "subjectColor": "#A8B9CC",
     "title": "C++ 🧱 ⚙️ 🚀",
@@ -45,6 +50,7 @@
     "formula": ""
   },
   {
+    "id": "ts",
     "subject": "Programming Language",
     "subjectColor": "#2C2D72",
     "title": "TypeScript 🧱 🧠 🌐",
@@ -54,6 +60,7 @@
     "formula": ""
   },
   {
+    "id": "html",
     "subject": "Programming Language",
     "subjectColor": "#E34C26",
     "title": "HTML 📄 🌐",
@@ -63,6 +70,7 @@
     "formula": ""
   },
   {
+    "id": "css",
     "subject": "Programming Language",
     "subjectColor": "#1572B6",
     "title": "CSS 🎨 🌐",
@@ -72,6 +80,7 @@
     "formula": ""
   },
   {
+    "id": "ruby",
     "subject": "Programming Language",
     "subjectColor": "#CC342D",
     "title": "Ruby 🌊 🧠",

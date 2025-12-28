@@ -4,7 +4,7 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 
 import { toPng } from "html-to-image";
-import { useRef, useState, useEffect, forwardRef, Dispatch, SetStateAction, RefObject } from "react";
+import { useRef, useState, useEffect, forwardRef, type Dispatch, type SetStateAction, type RefObject } from "react";
 
 import cards from "./cards.json"
 import ReactMarkdown from "react-markdown";
@@ -25,12 +25,13 @@ const PAGE_WIDTH_PX = 11 * DPI;    // 11in
 const PAGE_HEIGHT_PX = 8.5 * DPI;  // 8.5in
 
 const emptyCard: FlashcardProps = {
+  id: "",
   subject: "",
-  subjectColor: "#4CAF50",
+  subjectColor: "#9E9E9E", // Optional; defaults to neutral gray
   title: "",
   description: "",
-  formula: "",
-  example: "",
+  formula: "", // Optional; renders nothing if empty
+  example: "", // Optional; renders nothing if empty
   footer: ""
 };
 
@@ -324,15 +325,34 @@ export default function Home() {
 
 
 interface FlashcardProps {
+  id?: string; // Unique identifier (slug or UUID) for stable references and auto-save
   subject: string;
-  subjectColor: string;
+  subjectColor?: string; // Optional; defaults to neutral gray if missing
   title: string;
   description: string;
   qrCodeURL?: string;
-  formula?: string;
-  example?: string;
+  formula?: string; // Optional; renders nothing if missing
+  example?: string; // Optional; renders nothing if missing
   footer?: string;
 }
+
+// Default color mapping for subjects with fallback to neutral gray
+const DEFAULT_SUBJECT_COLORS: Record<string, string> = {
+  "Programming Language": "#9E9E9E",
+  "Math": "#4CAF50",
+  "Science": "#2196F3",
+  "History": "#FF5722",
+  "Biology": "#4CAF50",
+  "Chemistry": "#FF9800",
+  "Legend": "#607D8B",
+  "System": "#5e40f2",
+};
+
+// Get color for subject, with fallback to neutral gray
+const getSubjectColor = (subject: string, customColor?: string): string => {
+  if (customColor) return customColor;
+  return DEFAULT_SUBJECT_COLORS[subject] || "#9E9E9E"; // Neutral gray fallback
+};
 
 interface FlashcardComponentProps extends FlashcardProps {
   onEdit?: () => void;
@@ -358,14 +378,16 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardComponentProps>(({
   footer,
   onEdit
 }, ref) => {
+  // Use provided color or get default based on subject, with fallback to neutral gray
+  const effectiveColor = getSubjectColor(subject, subjectColor);
 
   return (
     <div
       ref={ref}
       className="border rounded-lg shadow-lg flex flex-col overflow-hidden relative"
       style={{
-        borderColor: subjectColor,
-        backgroundColor: subjectColor,
+        borderColor: effectiveColor,
+        backgroundColor: effectiveColor,
         width: `${CARD_WIDTH_PX}px`,
         height: `${CARD_HEIGHT_PX}px`
       }}
@@ -382,7 +404,7 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardComponentProps>(({
       {/* Subject Banner */}
       <div
         className="text-white text-center py-1"
-        style={{ backgroundColor: subjectColor }}
+        style={{ backgroundColor: effectiveColor }}
       >
         <span className="font-bold uppercase text-lg">{subject}</span>
       </div>
@@ -445,6 +467,8 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardComponentProps>(({
   );
 });
 
+Flashcard.displayName = "Flashcard";
+
 
 const CardEditor: React.FC<CardEditorProps> = ({ card, setCard, editorRef, saveStatus = "idle", saveError = "", isEditingBaseCard = false }) => {
   const previewRef = useRef<HTMLDivElement>(null);
@@ -501,7 +525,20 @@ const CardEditor: React.FC<CardEditorProps> = ({ card, setCard, editorRef, saveS
           </div>
         </div>
         <div className="flex flex-wrap mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6">
+          <div className="w-full md:w-1/3 px-3 mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              ID <span className="text-gray-500 font-normal">(optional, auto-save key)</span>
+              <input
+                type="text"
+                name="id"
+                value={card.id || ""}
+                onChange={handleChange}
+                placeholder="e.g., java, python, js"
+                className="w-full border rounded px-3 py-2 mt-1"
+              />
+            </label>
+          </div>
+          <div className="w-full md:w-1/3 px-3 mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Subject
               <input
@@ -513,13 +550,13 @@ const CardEditor: React.FC<CardEditorProps> = ({ card, setCard, editorRef, saveS
               />
             </label>
           </div>
-          <div className="w-full md:w-1/2 px-3 mb-6">
+          <div className="w-full md:w-1/3 px-3 mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Subject Color
+              Subject Color <span className="text-gray-500 font-normal">(optional)</span>
               <input
                 type="color"
                 name="subjectColor"
-                value={card.subjectColor}
+                value={card.subjectColor || "#9E9E9E"}
                 onChange={handleChange}
                 className="w-full h-10 border rounded px-3 py-2 mt-1"
               />
@@ -555,11 +592,11 @@ const CardEditor: React.FC<CardEditorProps> = ({ card, setCard, editorRef, saveS
 
         <div className="mb-6">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Formula
+            Formula <span className="text-gray-500 font-normal">(optional - renders nothing if empty)</span>
             <input
               type="text"
               name="formula"
-              value={card.formula}
+              value={card.formula || ""}
               onChange={handleChange}
               className="w-full border rounded px-3 py-2 mt-1"
             />
@@ -568,10 +605,10 @@ const CardEditor: React.FC<CardEditorProps> = ({ card, setCard, editorRef, saveS
 
         <div className="mb-6">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Example
+            Example <span className="text-gray-500 font-normal">(optional - renders nothing if empty)</span>
             <textarea
               name="example"
-              value={card.example}
+              value={card.example || ""}
               onChange={handleChange}
               className="w-full border rounded px-3 py-2 mt-1"
               rows={3}
