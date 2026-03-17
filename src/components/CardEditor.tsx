@@ -1,4 +1,4 @@
-import { useRef, useState, type Dispatch, type RefObject, type SetStateAction } from "react";
+import { useEffect, useRef, useState, type Dispatch, type RefObject, type SetStateAction } from "react";
 import { toPng } from "html-to-image";
 
 import Flashcard from "~/components/Flashcard";
@@ -26,6 +26,14 @@ const CardEditor: React.FC<CardEditorProps> = ({
     "idle" | "creating" | "created" | "error"
   >("idle");
   const [createError, setCreateError] = useState<string>("");
+  const [jsonText, setJsonText] = useState<string>(JSON.stringify(card, null, 2));
+  const [jsonError, setJsonError] = useState<string>("");
+  const [isEditingJson, setIsEditingJson] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isEditingJson) return;
+    setJsonText(JSON.stringify(card, null, 2));
+  }, [card, isEditingJson]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -81,6 +89,31 @@ const CardEditor: React.FC<CardEditorProps> = ({
       setCreateStatus("error");
       setCreateError(err instanceof Error ? err.message : "Unknown error");
     }
+  };
+
+  const applyJsonToCard = (rawJson: string) => {
+    try {
+      const parsed = JSON.parse(rawJson) as Partial<FlashcardType>;
+      if (!parsed || typeof parsed !== "object") {
+        throw new Error("JSON must be an object");
+      }
+      setCard((prev) => ({
+        ...prev,
+        ...parsed,
+      }));
+      setJsonError("");
+      return true;
+    } catch (err) {
+      setJsonError(err instanceof Error ? err.message : "Invalid JSON");
+      return false;
+    }
+  };
+
+  const handleJsonChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    setIsEditingJson(true);
+    setJsonText(value);
+    applyJsonToCard(value);
   };
 
   return (
@@ -236,6 +269,47 @@ const CardEditor: React.FC<CardEditorProps> = ({
             Error: {createError}
           </div>
         )}
+
+        <div className="mt-8">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-lg font-semibold">JSON Editor</h3>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsEditingJson(false);
+                  setJsonText(JSON.stringify(card, null, 2));
+                  setJsonError("");
+                }}
+                className="text-xs px-3 py-1 rounded border border-gray-300 hover:bg-gray-100"
+              >
+                Sync From Form
+              </button>
+              <button
+                type="button"
+                onClick={() => applyJsonToCard(jsonText)}
+                className="text-xs px-3 py-1 rounded border border-blue-300 text-blue-700 hover:bg-blue-50"
+              >
+                Apply JSON
+              </button>
+            </div>
+          </div>
+          <textarea
+            value={jsonText}
+            onChange={handleJsonChange}
+            onBlur={() => setIsEditingJson(false)}
+            rows={10}
+            className="w-full border rounded px-3 py-2 font-mono text-xs"
+          />
+          {jsonError && (
+            <div className="mt-2 text-sm text-red-600">
+              JSON Error: {jsonError}
+            </div>
+          )}
+          <p className="mt-2 text-xs text-gray-500">
+            Changes here will update the form when valid JSON is detected.
+          </p>
+        </div>
       </form>
 
       <div className="flex-1 flex flex-col items-end">
