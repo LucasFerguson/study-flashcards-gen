@@ -108,5 +108,15 @@
     "formula": "",
     "example": "```C\nint a = 10\nfor (int i = 0; i > 10; i++) {\n  a += i\n}\n```",
     "footer": "Illinois Tech - CS350, CS351, CS450"
+  },
+  {
+    "id": "legend",
+    "subject": "23423",
+    "subjectColor": "#9E9E9E",
+    "title": "23423",
+    "description": "4234234234",
+    "formula": "2342",
+    "example": "34234",
+    "footer": "234"
   }
 ]
