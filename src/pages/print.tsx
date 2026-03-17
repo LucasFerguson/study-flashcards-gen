@@ -35,15 +35,26 @@ export default function PrintPage() {
               <button
                 onClick={() => {
                   const printLayout = document.querySelector(`#page-${pageIndex}`);
+                  console.log("Download Page click", {
+                    pageIndex,
+                    selector: `#page-${pageIndex}`,
+                    elementFound: Boolean(printLayout),
+                  });
                   if (printLayout) {
                     toPng(printLayout as HTMLElement)
                       .then((dataUrl) => {
+                        console.log("Download Page success", {
+                          pageIndex,
+                          dataUrlLength: dataUrl.length,
+                        });
                         const link = document.createElement("a");
                         link.download = `flashcards-page-${pageIndex + 1}.png`;
                         link.href = dataUrl;
                         link.click();
                       })
                       .catch((err) => console.error("Error creating layout image:", err));
+                  } else {
+                    console.warn("Print layout not found for page", pageIndex);
                   }
                 }}
                 className="mb-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 print:hidden"

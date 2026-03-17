@@ -9,6 +9,7 @@ import {
   CARD_HEIGHT_PX,
   CARD_WIDTH_PX,
   HEADER_IMAGE_HEIGHT_PX,
+  getImageSrc,
   getSubjectColor,
   type Flashcard as FlashcardType,
 } from "~/lib/flashcards";
@@ -110,9 +111,10 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(
             style={{ height: `${HEADER_IMAGE_HEIGHT_PX}px` }}
           >
             <img
-              src={headerImageUrl}
+              src={getImageSrc(headerImageUrl)}
               alt={`${title} header`}
               className="h-full w-full object-cover"
+              crossOrigin="anonymous"
               loading="lazy"
             />
           </div>

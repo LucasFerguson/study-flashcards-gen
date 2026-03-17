@@ -45,3 +45,11 @@ export const CARD_HEIGHT_PX = 3.5 * DPI;
 export const PAGE_WIDTH_PX = 11 * DPI;
 export const PAGE_HEIGHT_PX = 8.5 * DPI;
 export const HEADER_IMAGE_HEIGHT_PX = Math.round(CARD_HEIGHT_PX * 0.33);
+
+export const getImageSrc = (url?: string) => {
+  if (!url) return "";
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return `/api/image-proxy?url=${encodeURIComponent(url)}`;
+  }
+  return url;
+};
