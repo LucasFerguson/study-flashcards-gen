@@ -4,6 +4,7 @@ export interface Flashcard {
   subjectColor?: string;
   title: string;
   description: string;
+  headerImageUrl?: string;
   qrCodeURL?: string;
   formula?: string;
   example?: string;
@@ -16,6 +17,7 @@ export const emptyCard: Flashcard = {
   subjectColor: "#9E9E9E",
   title: "",
   description: "",
+  headerImageUrl: "",
   formula: "",
   example: "",
   footer: "",
@@ -42,3 +44,4 @@ export const CARD_WIDTH_PX = 2.5 * DPI;
 export const CARD_HEIGHT_PX = 3.5 * DPI;
 export const PAGE_WIDTH_PX = 11 * DPI;
 export const PAGE_HEIGHT_PX = 8.5 * DPI;
+export const HEADER_IMAGE_HEIGHT_PX = Math.round(CARD_HEIGHT_PX * 0.33);

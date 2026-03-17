@@ -29,11 +29,32 @@ const CardEditor: React.FC<CardEditorProps> = ({
   const [jsonText, setJsonText] = useState<string>(JSON.stringify(card, null, 2));
   const [jsonError, setJsonError] = useState<string>("");
   const [isEditingJson, setIsEditingJson] = useState<boolean>(false);
+  const [uploadStatus, setUploadStatus] = useState<
+    "idle" | "uploading" | "uploaded" | "error"
+  >("idle");
+  const [uploadError, setUploadError] = useState<string>("");
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
 
   useEffect(() => {
     if (isEditingJson) return;
     setJsonText(JSON.stringify(card, null, 2));
   }, [card, isEditingJson]);
+
+  useEffect(() => {
+    const loadUploads = async () => {
+      try {
+        const response = await fetch("/api/uploads");
+        if (!response.ok) return;
+        const data = (await response.json()) as { success: boolean; files?: string[] };
+        if (data.success && data.files) {
+          setUploadedImages(data.files);
+        }
+      } catch (err) {
+        console.error("Failed to load uploads", err);
+      }
+    };
+    void loadUploads();
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -89,6 +110,46 @@ const CardEditor: React.FC<CardEditorProps> = ({
       setCreateStatus("error");
       setCreateError(err instanceof Error ? err.message : "Unknown error");
     }
+  };
+
+  const handleImageUpload = async (file: File) => {
+    try {
+      setUploadStatus("uploading");
+      setUploadError("");
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/api/uploads", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.error || "Upload failed");
+      }
+
+      const data = (await response.json()) as { success: boolean; url?: string };
+      if (data.success && data.url) {
+        setCard((prev) => ({ ...prev, headerImageUrl: data.url || "" }));
+        setUploadedImages((prev) =>
+          data.url && !prev.includes(data.url) ? [data.url, ...prev] : prev
+        );
+      }
+
+      setUploadStatus("uploaded");
+      setTimeout(() => setUploadStatus("idle"), 1500);
+    } catch (err) {
+      console.error("Upload failed", err);
+      setUploadStatus("error");
+      setUploadError(err instanceof Error ? err.message : "Unknown error");
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    void handleImageUpload(file);
   };
 
   const applyJsonToCard = (rawJson: string) => {
@@ -201,6 +262,61 @@ const CardEditor: React.FC<CardEditorProps> = ({
               rows={15}
             />
           </label>
+        </div>
+
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Header Image URL <span className="text-gray-500 font-normal">(optional)</span>
+            <input
+              type="text"
+              name="headerImageUrl"
+              value={card.headerImageUrl || ""}
+              onChange={handleChange}
+              placeholder="https://example.com/image.jpg or /uploads/your-file.png"
+              className="w-full border rounded px-3 py-2 mt-1"
+            />
+          </label>
+          <div className="mt-2 flex flex-wrap items-center gap-3">
+            <label className="inline-flex items-center gap-2 text-sm text-gray-600">
+              <span className="font-medium text-gray-700">Upload Image</span>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="block text-sm text-gray-600"
+              />
+            </label>
+            {uploadStatus === "uploading" && (
+              <span className="text-sm text-amber-600">Uploading…</span>
+            )}
+            {uploadStatus === "uploaded" && (
+              <span className="text-sm text-green-600">Uploaded</span>
+            )}
+            {uploadStatus === "error" && (
+              <span className="text-sm text-red-600">Error: {uploadError}</span>
+            )}
+          </div>
+          {uploadedImages.length > 0 && (
+            <div className="mt-3">
+              <div className="text-xs uppercase tracking-wide text-gray-500 mb-2">
+                Uploaded Images
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {uploadedImages.map((url) => (
+                  <button
+                    key={url}
+                    type="button"
+                    onClick={() => setCard((prev) => ({ ...prev, headerImageUrl: url }))}
+                    className={`h-16 w-16 overflow-hidden rounded border ${
+                      card.headerImageUrl === url ? "border-blue-500" : "border-gray-200"
+                    }`}
+                  >
+                    <img src={url} alt="Uploaded option" className="h-full w-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="mb-6">

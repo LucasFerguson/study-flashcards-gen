@@ -17,7 +17,8 @@
     "description": "JavaScript is a dynamically typed, garbage-collected language built around an **event-driven, single-threaded execution model**.\n\n## Runtime Model\n- Browser engines (V8, SpiderMonkey)\n- Node.js, Deno, Bun\n- Async I/O via event loop\n\n## Major Libraries and Tooling\n- **Frontend**: React, Vue, Svelte\n- **Meta-frameworks**: Next.js, Nuxt\n- **Backend**: Express, Fastify, Hono\n- **Build/Tooling**: Vite, Webpack, ESLint, Jest",
     "example": "```js\nconsole.log('Hello, World!');\n```",
     "footer": "Source: MDN Web Docs",
-    "formula": ""
+    "formula": "",
+    "headerImageUrl": "https://miro.medium.com/1*LyZcwuLWv2FArOumCxobpA.png"
   },
   {
     "id": "python",
@@ -27,7 +28,8 @@
     "description": "Python is a dynamically typed, interpreted language optimized for **readability, rapid iteration, and glue code**.\n\n## Execution Model\n- CPython interpreter\n\n## Major Libraries and Tooling\n- **Data/ML**: NumPy, Pandas, PyTorch, TensorFlow\n- **Vision**: OpenCV, Tesseract\n- **Web**: FastAPI, Flask, Django\n\n## Personal Usage\n- Used in **ocr-image-to-excalidraw** for OCR pipelines",
     "example": "```python\nprint('Hello, World!')\n```",
     "footer": "Source: Python.org",
-    "formula": ""
+    "formula": "",
+    "headerImageUrl": ""
   },
   {
     "id": "java",
@@ -37,7 +39,8 @@
     "description": "Java is a statically typed, JVM-based language emphasizing **portability, strong tooling, and long-lived systems**.\n\n## Runtime Model\n- JVM with JIT compilation\n- Garbage-collected memory\n- Strong backward compatibility\n\n## Major Libraries and Tooling\n- **Enterprise**: Spring Boot, Hibernate\n- **Build**: Maven, Gradle\n- **Testing**: JUnit, Mockito\n- **Robotics**: WPILib (FIRST Robotics)",
     "example": "```java\nSystem.out.println(\"Hello, World!\");\n```",
     "footer": "Source: Oracle Java Documentation",
-    "formula": ""
+    "formula": "",
+    "headerImageUrl": "https://img.appmaster.io/019b86d6-bd35-7e11-8dbc-335896b200fc/blog/019be26d-61fc-73b5-86ff-9d71b7fa314e/019be26d62.webp"
   },
   {
     "id": "cpp",
@@ -47,7 +50,8 @@
     "description": "C++ is a statically typed, compiled systems language offering **explicit control over memory and performance**.\n\n## Execution Model\n- Ahead-of-time compilation\n- RAII-based memory management\n- Zero-cost abstractions\n\n## Major Libraries and Tooling\n- **Core**: STL, Boost\n- **Build**: CMake, Meson\n- **Engines**: Unreal Engine\n- **Vision**: OpenCV",
     "example": "```cpp\nstd::cout << \"Hello, World!\" << std::endl;\n```",
     "footer": "Source: ISO C++ Standard",
-    "formula": ""
+    "formula": "",
+    "headerImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1280px-ISO_C%2B%2B_Logo.svg.png"
   },
   {
     "id": "ts",
@@ -57,7 +61,8 @@
     "description": "TypeScript adds a **structural static type system** on top of JavaScript.\n\n## Type System\n- Compile-time only\n- Structural typing\n\n## Major Libraries and Tooling\n- **Frontend**: React, Angular\n- **Backend**: NestJS, tRPC\n- **Schema/Types**: Zod, Prisma\n\n## Strengths\n- Safer refactors\n- Excellent editor tooling\n- Scales well for large apps",
     "example": "```ts\nconsole.log('Hello, World!');\n```",
     "footer": "Source: TypeScriptlang.org",
-    "formula": ""
+    "formula": "",
+    "headerImageUrl": "https://miro.medium.com/1*moJeTvW97yShLB7URRj5Kg.png"
   },
   {
     "id": "html",

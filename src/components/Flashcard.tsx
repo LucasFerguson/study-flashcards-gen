@@ -8,6 +8,7 @@ import QRCode from "react-qr-code";
 import {
   CARD_HEIGHT_PX,
   CARD_WIDTH_PX,
+  HEADER_IMAGE_HEIGHT_PX,
   getSubjectColor,
   type Flashcard as FlashcardType,
 } from "~/lib/flashcards";
@@ -65,6 +66,7 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(
       subjectColor,
       title,
       description,
+      headerImageUrl,
       qrCodeURL,
       formula,
       example,
@@ -101,6 +103,20 @@ const Flashcard = forwardRef<HTMLDivElement, FlashcardProps>(
         >
           <span className="font-bold uppercase text-lg">{subject}</span>
         </div>
+
+        {headerImageUrl && (
+          <div
+            className="w-full overflow-hidden bg-white"
+            style={{ height: `${HEADER_IMAGE_HEIGHT_PX}px` }}
+          >
+            <img
+              src={headerImageUrl}
+              alt={`${title} header`}
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        )}
 
         <div className="flex-grow p-2 bg-white flex flex-col justify-between rounded-md mx-2 mb-1 shadow-sm">
           <div>

@@ -8,6 +8,7 @@ interface Flashcard {
 	subjectColor?: string;
 	title: string;
 	description: string;
+	headerImageUrl?: string;
 	qrCodeURL?: string;
 	formula?: string;
 	example?: string;
@@ -99,6 +100,7 @@ async function handlePOST(
 			subjectColor: card.subjectColor,
 			title: card.title,
 			description: card.description,
+			headerImageUrl: card.headerImageUrl || "",
 			formula: card.formula || "",
 			example: card.example || "",
 			footer: card.footer || "",

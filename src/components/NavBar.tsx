@@ -6,6 +6,7 @@ const navItems = [
   { href: "/editor", label: "Editor" },
   { href: "/cards", label: "Cards" },
   { href: "/print", label: "Print" },
+  { href: "/tabletop", label: "Tabletop" },
 ];
 
 const NavBar = () => {
