@@ -88,5 +88,25 @@
     "example": "```ruby\nputs 'Hello, World!'\n```",
     "footer": "Source: Ruby-lang.org",
     "formula": ""
+  },
+  {
+    "id": "startup",
+    "subject": "Entrepreneurship",
+    "subjectColor": "#1b40f8",
+    "title": "Entrepreneurship",
+    "description": "# IPRO Startup Studio\n- Nik Rokop and Shivani\n\n# IPRO Lab to Launch\n- Don DeLoach\n\nMotivation: YOU should launch products to someday create a company!",
+    "formula": "",
+    "example": "",
+    "footer": "Illinois Tech"
+  },
+  {
+    "id": "os",
+    "subject": "Computer Science",
+    "subjectColor": "#fbc532",
+    "title": "Low Level Systems Classes",
+    "description": "CS350 - MIPS Assembly\nCS351 - C, Bit-wise ops, Bomb Lab (x86)\nCS450 - Operating System. File System, Processes, Threads\n\nProfessor: Farshad Ghanei",
+    "formula": "",
+    "example": "```C\nint a = 10\nfor (int i = 0; i > 10; i++) {\n  a += i\n}\n```",
+    "footer": "Illinois Tech - CS350, CS351, CS450"
   }
 ]
